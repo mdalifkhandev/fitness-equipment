@@ -13,7 +13,7 @@ export type TMenubarItem = {
 export type TUserPath = {
   name: string;
   path?: string;
-  index?:boolean
+  index?: boolean;
   element?: ReactNode;
   children?: TUserPath[];
 };

@@ -9,9 +9,7 @@
     //outside shad cn ui
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     },
     //outside shad cn ui
 

@@ -1,20 +1,17 @@
-import { useEffect } from "react"
+import { useEffect } from 'react';
 
-const Home=()=>{
+const Home = () => {
+  useEffect(() => {
+    document.title = 'FIT-EQ Home page';
+  }, []);
 
-    useEffect(()=>{
-        document.title='FIT-EQ Home page'
-    },[])
-    
-   return (
-       <div>
-        <title>
+  return (
+    <div>
+      <title></title>
 
-        </title>
-        
-           <h1>Hello , Home !</h1>
-       </div>
-   )
-}
+      <h1>Hello , Home !</h1>
+    </div>
+  );
+};
 
-export default Home
+export default Home;
