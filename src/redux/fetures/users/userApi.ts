@@ -1,6 +1,6 @@
 import { baseApi } from '@/redux/api/baseApi';
 
-const authApi = baseApi.injectEndpoints({
+const userhApi = baseApi.injectEndpoints({
   endpoints: builder => ({
     createUser: builder.mutation({
       query: userInfo => ({
@@ -12,4 +12,4 @@ const authApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useCreateUserMutation } = authApi;
+export const { useCreateUserMutation } = userhApi;

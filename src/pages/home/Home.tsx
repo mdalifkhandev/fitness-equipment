@@ -1,3 +1,4 @@
+import Carousel from '@/components/headers/carousel/Carousels';
 import { useEffect } from 'react';
 
 const Home = () => {
@@ -7,9 +8,7 @@ const Home = () => {
 
   return (
     <div>
-      <title></title>
-
-      <h1>Hello , Home !</h1>
+      <Carousel />
     </div>
   );
 };

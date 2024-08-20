@@ -4,7 +4,7 @@ import { setUser } from '@/redux/fetures/auth/authSlice';
 import { useAppDispatch } from '@/redux/hooks';
 import { verifyToken } from '@/utils/verifyToken';
 import { Button, Checkbox, Form, FormProps, Input } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
 type FieldType = {
@@ -18,15 +18,26 @@ type FieldType = {
 const Login = () => {
   const dispatch = useAppDispatch();
   const [Login] = useLoginMutation();
+  const navigate = useNavigate();
   const onFinish: FormProps<FieldType>['onFinish'] = async values => {
-    const userInfo = {
-      email: values.email,
-      password: values.password,
-    };
-    const res = await Login(userInfo).unwrap();
-    toast.success('Login Successfully');
-    const user = verifyToken(res.data.accessToken);
-    dispatch(setUser({ user: user, token: res.data.accessToken }));
+    try {
+      const userInfo = {
+        email: values.email,
+        password: values.password,
+      };
+      const res = await Login(userInfo).unwrap();
+      toast.success('Login Successfully');
+      const user = verifyToken(res.data.accessToken);
+      dispatch(setUser({ user: user, token: res.data.accessToken }));
+      navigate('/');
+    } catch (error: unknown) {
+      if (typeof error === 'object' && error !== null && 'data' in error) {
+        const errorData = (error as { data: { message: string } }).data;
+        toast.error(`Error: ${errorData.message}`);
+      } else {
+        toast.error('An unexpected error occurred');
+      }
+    }
   };
 
   const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = errorInfo => {
@@ -91,6 +102,9 @@ const Login = () => {
               Forgate Password
             </Link>
           </div>
+          {/* <div className='text-red-600 flex justify-center p-5'>
+              {error?.data?.message}
+            </div> */}
         </Form>
       </div>
     </div>

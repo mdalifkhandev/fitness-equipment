@@ -1,6 +1,7 @@
 import { useCreateUserMutation } from '@/redux/fetures/users/userApi';
 import { Button, Checkbox, Form, FormProps, Input } from 'antd';
 import { Link } from 'react-router-dom';
+import { toast } from 'sonner';
 
 type FieldType = {
   firstName?: string;
@@ -13,13 +14,18 @@ type FieldType = {
 const Registration = () => {
   const [createRoot, { data }] = useCreateUserMutation();
   const onFinish: FormProps<FieldType>['onFinish'] = values => {
-    const userInfo = {
-      firstName: values.firstName,
-      lestName: values.lestName,
-      email: values.email,
-      password: values.password,
-    };
-    createRoot(userInfo);
+    try {
+      const userInfo = {
+        firstName: values.firstName,
+        lestName: values.lestName,
+        email: values.email,
+        password: values.password,
+      };
+      createRoot(userInfo);
+      toast.success('Account created successfully');
+    } catch (error) {
+      toast.error(`Error: ${error}`);
+    }
   };
 
   const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = errorInfo => {
