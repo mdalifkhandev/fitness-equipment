@@ -2,9 +2,7 @@ import ProtactRoute from '@/components/layout/protctedRoute/ProtactRoute';
 import About from '@/pages/about/About';
 import Contact from '@/pages/contact/Contact';
 import Home from '@/pages/home/Home';
-import Login from '@/pages/login/Login';
 import Products from '@/pages/products/Products';
-import Registration from '@/pages/registration/Registration';
 
 export const userPath = [
   {
@@ -16,7 +14,28 @@ export const userPath = [
   {
     name: 'All Shops',
     path: 'products',
-    element: <Products />
+    element: <Products />,
+  },
+
+  {
+    name: 'Catagory',
+    children: [
+      {
+        name: 'Cardio',
+        path: 'products/Cardio',
+        element: <Products />,
+      },
+      {
+        name: 'Bells & Plates',
+        path: 'products/Bells & Plates',
+        element: <Products />,
+      },
+      {
+        name: 'Racks',
+        path: 'products/Racks',
+        element: <Products />,
+      },
+    ],
   },
   {
     name: 'About',
@@ -35,15 +54,5 @@ export const userPath = [
         <Contact />
       </ProtactRoute>
     ),
-  },
-  {
-    name: 'Login',
-    path: 'login',
-    element: <Login />,
-  },
-  {
-    name: 'Registration',
-    path: 'registration',
-    element: <Registration />,
   },
 ];

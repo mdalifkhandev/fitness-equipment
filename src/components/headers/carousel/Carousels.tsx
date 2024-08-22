@@ -1,30 +1,30 @@
 import { Carousel } from 'antd';
-
+import img1 from '@/assets/New folder/ssss/Custom_Gym_Page_2024_Banner_FINAL_6-19-24_optimized.png';
+import img2 from '@/assets/New folder/ssss/Recumbent-collectionbanner_1_optimized.png';
+import img3 from '@/assets/New folder/ssss/gym-interior-with-exercise-equipment-vector-48659039_1400x500.jpg';
+import img4 from '@/assets/New folder/ssss/images_1400x500.jpeg';
+import img5 from '@/assets/New folder/ssss/images_1_1400x500.jpeg';
 const items = [
   {
     key: 1,
-    image: 'https://www.simpleimageresizer.com/_uploads/photos/c01f7604/Recumbent-collectionbanner_1_1_optimized.png',
+    image: img1,
   },
 
   {
     key: 2,
-    image:
-      'https://www.simpleimageresizer.com/_uploads/photos/c01f7604/Custom_Gym_Page_2024_Banner_FINAL_6-19-24_optimized.png',
+    image: img2,
   },
   {
     key: 3,
-    image:
-      'https://www.simpleimageresizer.com/_uploads/photos/c01f7604/gym-interior-with-exercise-equipment-vector-48659039_1400x500.jpg',
+    image: img3,
   },
   {
     key: 4,
-    image:
-      'https://www.simpleimageresizer.com/_uploads/photos/c01f7604/images_1400x500.jpeg',
+    image: img4,
   },
   {
     key: 5,
-    image:
-      'https://www.simpleimageresizer.com/_uploads/photos/c01f7604/images_1_1_1400x500.jpeg',
+    image: img5,
   },
 ];
 

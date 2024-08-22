@@ -5,22 +5,37 @@
   },
   {
     "key": 2,
-    "image":
-      "https: //www.simpleimageresizer.com/_uploads/photos/c01f7604/Custom_Gym_Page_2024_Banner_FINAL_6-19-24_optimized.png"
+    "image": "https: //www.simpleimageresizer.com/_uploads/photos/c01f7604/Custom_Gym_Page_2024_Banner_FINAL_6-19-24_optimized.png"
   },
   {
     "key": 3,
-    "image":
-      "https: //www.simpleimageresizer.com/_uploads/photos/c01f7604/gym-interior-with-exercise-equipment-vector-48659039_1400x500.jpg"
+    "image": "https: //www.simpleimageresizer.com/_uploads/photos/c01f7604/gym-interior-with-exercise-equipment-vector-48659039_1400x500.jpg"
   },
   {
     "key": 4,
-    "image":
-      "https: //www.simpleimageresizer.com/_uploads/photos/c01f7604/images_1400x500.jpeg"
+    "image": "https: //www.simpleimageresizer.com/_uploads/photos/c01f7604/images_1400x500.jpeg"
   },
   {
     "key": 5,
-    "image":
-      "https: //www.simpleimageresizer.com/_uploads/photos/c01f7604/images_1_1_1400x500.jpeg"
+    "image": "https: //www.simpleimageresizer.com/_uploads/photos/c01f7604/images_1_1_1400x500.jpeg"
+  },
+  {
+    "image": {
+      "img1": "https://mightyfitness.shop/cdn/shop/files/RunMighty-AssaultTreadmill.webp?v=1706804696",
+      "img2": "https://mightyfitness.shop/cdn/shop/files/LifeSpan-TR5500i-Folded-Treadmill_900x900_crop_center_65c3f90c-8f83-4491-a64d-681cfac11e73.webp?v=1703629479&width=360",
+      "img3": "https://mightyfitness.shop/cdn/shop/files/Lifespan-tr1200i_folding-treadmill-fold-up-open_900x900_crop_center_983e3cce-bf7a-4d4d-9d31-c070ca40956f.webp?v=1703629088&width=360",
+      "img4": "https://mightyfitness.shop/cdn/shop/files/EFC-T30FoldingTreadmill.jpg?v=1704517899&width=360",
+      "img5": "https://mightyfitness.shop/cdn/shop/files/SpinMighty-AssaultBike.png?v=1706805531&width=360",
+      "img6": "https://mightyfitness.shop/cdn/shop/products/Mighty_Fitness_Kettbell_-_4KG_-_8.8LB.png?v=1704734171&width=360",
+      "img7": "https://mightyfitness.shop/cdn/shop/products/MightyFitness-HexDumbbells-15LBs.jpg?v=1644620703&width=360",
+      "img8": "https://mightyfitness.shop/cdn/shop/files/MIGHTYAdjustableDumbbell3.png?v=1699419340&width=360",
+      "img9": "https://mightyfitness.shop/cdn/shop/products/CastIron-BarbellStandard-EliteSeries-45LBs_3b63f812-851b-43dc-8627-633cfa415bcb.jpg?v=1704732983&width=360",
+      "img10": "https://mightyfitness.shop/cdn/shop/products/MightyFitness-45LBBumperPlate.png?v=1704734061&width=360",
+      "img11": "https://mightyfitness.shop/cdn/shop/files/MightyFitnessApprenticeSeries-MongooseSide.png?v=1699401762&width=360",
+      "img12": "https://mightyfitness.shop/cdn/shop/files/TetraSquatRacka.png?v=1702336641&width=360",
+      "img13": "https://mightyfitness.shop/cdn/shop/products/MinotaurPowerRack-ApprenticeSeries-WithPulley.png?v=1640238576&width=360",
+      "img14": "https://mightyfitness.shop/cdn/shop/files/SabreTooth.webp?v=1706804958&width=360",
+      "img15": "https://mightyfitness.shop/cdn/shop/files/L101-with-brand.jpg?v=1704327674&width=720"
+    }
   }
 ]

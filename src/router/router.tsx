@@ -5,6 +5,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import { userPath } from './userRoute';
 import { routerGenerator } from '@/utils/routerGenerator';
 import { profilePath } from './profileRoute';
+import ProductDetails from '@/pages/products/ProductDetails';
+import Products from '@/pages/products/Products';
 
 const router = createBrowserRouter([
   {
@@ -18,12 +20,26 @@ const router = createBrowserRouter([
     children: routerGenerator(profilePath),
   },
   {
-    path: '/login',
-    element: <Login />,
-  },
-  {
-    path: '/registration',
-    element: <Registration />,
+    path: '/',
+    element: <App />,
+    children: [
+      {
+        path: 'products/:id',
+        element: <ProductDetails />,
+      },
+      {
+        path: '/products/:catagory',
+        element: <Products />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
+      },
+      {
+        path: '/registration',
+        element: <Registration />,
+      },
+    ],
   },
 ]);
 
