@@ -16,27 +16,6 @@ export const userPath = [
     path: 'products',
     element: <Products />,
   },
-
-  {
-    name: 'Catagory',
-    children: [
-      {
-        name: 'Cardio',
-        path: 'products/Cardio',
-        element: <Products />,
-      },
-      {
-        name: 'Bells & Plates',
-        path: 'products/Bells & Plates',
-        element: <Products />,
-      },
-      {
-        name: 'Racks',
-        path: 'products/Racks',
-        element: <Products />,
-      },
-    ],
-  },
   {
     name: 'About',
     path: 'About',

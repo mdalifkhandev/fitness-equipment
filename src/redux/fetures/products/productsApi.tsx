@@ -3,10 +3,15 @@ import { baseApi } from '@/redux/api/baseApi';
 const productsAPI = baseApi.injectEndpoints({
   endpoints: builders => ({
     getProducts: builders.query({
-      query: args => ({
-        url: `/products?${args}`,
-        method: 'GET',
-      }),
+      query: args => {
+        console.log(args);
+
+        return {
+          url: `/products?catagory=${args}`,
+          method: 'GET',
+        };
+      },
+      // providesTags : ['products'],
     }),
     getSingleProducts: builders.query({
       query: params => ({

@@ -5,24 +5,28 @@ import phone from '@/assets/New folder/benefit/woman-phone-footer-1.webp';
 
 const items = [
   {
+    key: '1',
     img: appleWatch,
     title: 'Apple Watch® Compatible',
     details:
       "Easily track how hard you're working with real-time feedback from your favorite devices.",
   },
   {
+    key: '2',
     img: helth,
     title: 'Heath and Body',
     details:
       'Cardiovascular Health: Engaging in regular aerobic exercises like running, cycling, or swimming improves heart and lung function.',
   },
   {
+    key: '3',
     img: strength,
     title: 'Strength Training Basics',
     details:
       'Resistance Training: Involves exercises that cause muscles to contract against external resistance, such as weights, resistance bands, or body weight',
   },
   {
+    key: '4',
     img: phone,
     title: 'Fitness Chick Regulerly',
     details:
@@ -38,7 +42,7 @@ const BenefitSection = () => {
       </h1>
       <div className=" grid grid-cols-2">
         {items.map(item => (
-          <div>
+          <div key={item.key}>
             <img src={item.img} className="w-[500px] mx-auto" alt="" />
             <h1 className="text-center font-bold text-xl">{item.title}</h1>
             <p className="text-center">{item.details}</p>

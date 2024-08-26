@@ -5,8 +5,6 @@ import { Link, Outlet } from 'react-router-dom';
 import Profile from '@/pages/profile/Profile';
 import { useAppSelector } from '@/redux/hooks';
 import { useCurrentToken } from '@/redux/fetures/auth/authSlice';
-import { useGetProductsCatagoreQuery } from '@/redux/fetures/products/productsApi';
-import Loding from '@/utils/Loding';
 
 const { Header, Content } = Layout;
 
@@ -17,11 +15,6 @@ const MainLayout = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
-  const { data } = useGetProductsCatagoreQuery(undefined);
-  if (!data) {
-    return <Loding />;
-  }
-  console.log(data);
 
   return (
     <div>
