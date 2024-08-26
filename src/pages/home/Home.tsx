@@ -11,7 +11,7 @@ const Home = () => {
     document.title = 'FIT-EQ Home page';
   }, []);
 
-  const { data } = useGetProductsQuery(undefined);
+  const { data } = useGetProductsQuery({});
 
   return (
     <div className="relative">

@@ -3,11 +3,12 @@ import { baseApi } from '@/redux/api/baseApi';
 const productsAPI = baseApi.injectEndpoints({
   endpoints: builders => ({
     getProducts: builders.query({
-      query: args => {
-        console.log(args);
+      query: ({ catagory, search }) => {
+        console.log(catagory, search);
 
         return {
-          url: `/products?catagory=${args}`,
+          // url: `/products`,
+          url: `/products?catagory=${catagory}&name=${search}`,
           method: 'GET',
         };
       },
