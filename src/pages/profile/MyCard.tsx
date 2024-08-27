@@ -33,7 +33,7 @@ const MyCard = () => {
   return (
     <div>
       <div className="grid grid-cols-4 gap-6">
-        {// eslint-disable-next-line @typescript-eslint/no-explicit-any
+        {
         data?.data?.map((card: any) => (
           //   <a href={`/products/${card.productID}`}>
           <Card
