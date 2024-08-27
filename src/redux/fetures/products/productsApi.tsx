@@ -27,19 +27,6 @@ const productsAPI = baseApi.injectEndpoints({
         method: 'GET',
       }),
     }),
-    // createAddToCard: builders.mutation({
-    //   query: (data )=> {
-    //     console.log(data);
-    //     return {
-    //       url: `/products/addtocard`,
-    //       method: 'POST',
-    //       body:data,
-    //     //   url: '/products/addtocard',
-    //     // method: 'POST',
-    //     // body: data,
-    //     };
-    //   },
-    // }),
   }),
 });
 

@@ -9,7 +9,12 @@ const ProductCard = ({ card }: any) => {
       <Card
         className="h-[410px]"
         hoverable
-        cover={<img alt={card.name} src={card.image.img1} />}
+        cover={
+          <img
+            alt={card.name}
+            src={card.image ? card.image.img1 : card.image}
+          />
+        }
       >
         <div>
           <h1 className="font-bold text-center h-10">{card.name}</h1>

@@ -1,5 +1,6 @@
 import ProtactRoute from '@/components/layout/protctedRoute/ProtactRoute';
 import AccountDetails from '@/pages/profile/AccountDetails';
+import MyCard from '@/pages/profile/MyCard';
 import OrderHistory from '@/pages/profile/OrderHistory';
 
 export const profilePath = [
@@ -19,6 +20,15 @@ export const profilePath = [
     element: (
       <ProtactRoute>
         <OrderHistory />
+      </ProtactRoute>
+    ),
+  },
+  {
+    name: 'MY Card',
+    path: 'my-card',
+    element: (
+      <ProtactRoute>
+        <MyCard />
       </ProtactRoute>
     ),
   },

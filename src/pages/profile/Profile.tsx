@@ -34,6 +34,14 @@ const Profile = () => {
       ) : null,
     },
     {
+      key: 'My Card',
+      label: token ? (
+        <Link to={'/my-card'} className="">
+          My Card
+        </Link>
+      ) : null,
+    },
+    {
       key: 'logout',
       danger: true,
       label: token ? (

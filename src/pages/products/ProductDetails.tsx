@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCurrentToken } from '@/redux/fetures/auth/authSlice';
-import { useCreateAddToCardMutation } from '@/redux/fetures/products/createProcuct';
+import { useCreateAddToCardMutation } from '@/redux/fetures/products/cardProcuct';
 import { useGetSingleProductsQuery } from '@/redux/fetures/products/productsApi';
 import { useAppSelector } from '@/redux/hooks';
 import Images from '@/utils/Image';
@@ -26,7 +26,7 @@ const ProductDetails = () => {
 
   const image = data.data.image;
   const dat = data.data;
-  console.log(dat.name);
+  console.log(dat);
 
   const handleAddToCard = async () => {
     const addToCardInfo = {
@@ -69,7 +69,19 @@ const ProductDetails = () => {
             <span>$ {dat.price - (dat.price / 100) * dat.discount}</span>
             <span className="text-red-600">Save {dat.discount} %</span>
           </div>
-          <div>
+          <div className="my-3 text-xl">
+            <h1>Catagory: {dat.catagory}</h1>
+            <h1>
+              {' '}
+              Stock :{' '}
+              {dat.instock === 0 ? (
+                <span className="font-bold ">Stock out</span>
+              ) : (
+                <span className="font-bold">{dat.instock}</span>
+              )}
+            </h1>
+          </div>
+          <div className="my-3">
             <h1>Shipping calculated at checkout.</h1>
           </div>
           <h1 className="divider pt-4"></h1>
@@ -82,7 +94,10 @@ const ProductDetails = () => {
             </Button>
           </div>
           <div className="mb-14">
-            <Button className="w-full my-3 btn bg-[#3C0DEF] text-white">
+            <Button
+              disabled={dat.instock === 0}
+              className="w-full my-3 btn bg-[#3C0DEF] text-white"
+            >
               BUY NOW
             </Button>
           </div>
