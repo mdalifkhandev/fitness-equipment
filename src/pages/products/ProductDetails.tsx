@@ -7,6 +7,7 @@ import Images from '@/utils/Image';
 import Loding from '@/utils/Loding';
 import { verifyToken } from '@/utils/verifyToken';
 import { Button, Rate } from 'antd';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 
@@ -15,6 +16,7 @@ const ProductDetails = () => {
   const { data } = useGetSingleProductsQuery(id);
   const token = useAppSelector(useCurrentToken) || ' ';
   const [CardData] = useCreateAddToCardMutation();
+  const [quentity,setQuentity]=useState(1)
 
   if (!data) {
     return <Loding />;
@@ -83,6 +85,11 @@ const ProductDetails = () => {
           </div>
           <div className="my-3">
             <h1>Shipping calculated at checkout.</h1>
+          </div>
+          <div> <span className='mr-3'>Quentity : </span>
+            <Button disabled={quentity===dat.instock} onClick={()=>{setQuentity(quentity+1)}}>+</Button>
+<span className='mx-5'>{quentity}</span>
+            <Button disabled={quentity===1} onClick={()=>{setQuentity(quentity-1)}}>-</Button>
           </div>
           <h1 className="divider pt-4"></h1>
           <div>

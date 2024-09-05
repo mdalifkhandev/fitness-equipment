@@ -2,10 +2,8 @@
 import { useGetProductsCatagoreQuery } from '@/redux/fetures/products/productsApi';
 import Loding from '@/utils/Loding';
 import { Select } from 'antd';
-import { useNavigate } from 'react-router-dom';
 
 const SelectsCatagory = ({ setValues }: any) => {
-  const navigate = useNavigate();
   const { data: catagory } = useGetProductsCatagoreQuery(undefined);
   if (!catagory) {
     return <Loding />;
@@ -16,16 +14,20 @@ const SelectsCatagory = ({ setValues }: any) => {
     return options;
   });
   const handleChange = (value: any) => {
-    setValues(value.value);
-    navigate(`?catagory=${value.value}`);
+    const valueArray=(value.map((val:any)=>val.value));
+    setValues(valueArray);
   };
 
   return (
     <div>
       <Select
+        mode="multiple"
+        allowClear
+        className='w-10'
         style={{ width: '100%' }}
         labelInValue
-        defaultValue="Catagory"
+        placeholder="Catagory"
+        defaultValue={option}
         onChange={handleChange}
         options={option}
       />
