@@ -9,7 +9,7 @@ import {
   useGetUserInfoQuery,
   useGetUserQuery,
 } from '@/redux/fetures/users/userApi';
-import Payment from '../payment/Payment';
+import PaymentCatchOn from '../payment/PaymentCatchOn';
 
 type TDeleveryProductInfo = {
   userName: string;
@@ -48,7 +48,7 @@ const CheakOut = () => {
   }
 
   const product = data?.data;
-  console.log(productId, product);
+  // console.log(productId, product);
 
   const shipping = Math.ceil(
     (product?.price / 100) * 2 * (quentity || 1) > 10
@@ -118,7 +118,7 @@ const CheakOut = () => {
                 </p>
               </div>
               <div className="m-5 p-5 shadow-2xl">
-                <Payment deleveryProductsInfo={deleveryProductsInfo} />
+                <PaymentCatchOn deleveryProductsInfo={deleveryProductsInfo} />
               </div>
             </>
           ) : (

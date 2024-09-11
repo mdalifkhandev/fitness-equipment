@@ -41,6 +41,7 @@ const Login = () => {
   };
 
   const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = errorInfo => {
+    // eslint-disable-next-line no-console
     console.log('Failed:', errorInfo);
   };
 

@@ -34,13 +34,10 @@ const MyCard = () => {
       ? sum + (card.price - (card.price / 100) * card.discount) * quantity
       : sum;
   }, 0);
-  console.log(totalPrice);
-  console.log(data.data);
 
   const hendleRemoveDataFormCard = async (id: any) => {
     try {
       const res = await remove(id).unwrap();
-      console.log(res.message);
 
       toast.success(res.message);
     } catch (error: any) {

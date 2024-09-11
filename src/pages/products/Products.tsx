@@ -17,14 +17,12 @@ const Products = () => {
     minPrice,
     maxPrice,
   };
-  console.log(minPrice, maxPrice);
 
   const { data } = useGetProductsQuery(query);
 
   if (!data) {
     return <Loding />;
   }
-  console.log(data);
 
   return (
     <div>

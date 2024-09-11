@@ -4,7 +4,7 @@ import { Button, Drawer } from 'antd';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-const Payment = ({ deleveryProductsInfo }: any) => {
+const PaymentCatchOn = ({ deleveryProductsInfo }: any) => {
   const [dataPost] = useCreateOrderDataMutation();
   // const [dataPost,{data }]=useCreateOrderDataMutation()
   const {
@@ -50,7 +50,7 @@ const Payment = ({ deleveryProductsInfo }: any) => {
       productsTotalPrice,
     };
 
-    console.log(orderData);
+    // console.log(orderData);
     try {
       dataPost(orderData);
       toast.success('Order Data Created Successfully');
@@ -124,4 +124,4 @@ const Payment = ({ deleveryProductsInfo }: any) => {
   );
 };
 
-export default Payment;
+export default PaymentCatchOn;

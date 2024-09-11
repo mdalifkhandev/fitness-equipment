@@ -8,10 +8,12 @@ type FieldType = {
 };
 
 const onFinish: FormProps<FieldType>['onFinish'] = values => {
+  // eslint-disable-next-line no-console
   console.log('Success:', values);
 };
 
 const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = errorInfo => {
+  // eslint-disable-next-line no-console
   console.log('Failed:', errorInfo);
 };
 

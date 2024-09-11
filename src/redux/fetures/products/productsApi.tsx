@@ -4,8 +4,6 @@ const productsAPI = baseApi.injectEndpoints({
   endpoints: builders => ({
     getProducts: builders.query({
       query: ({ catagory, search, minPrice, maxPrice }) => {
-        console.log(catagory, search, minPrice, maxPrice);
-
         return {
           // url: `/products`,
           url: `/products?catagory=${catagory}&name=${search}&minPrice=${minPrice}&maxPrice=${maxPrice}`,
@@ -16,8 +14,6 @@ const productsAPI = baseApi.injectEndpoints({
     }),
     getSingleProducts: builders.query({
       query: params => {
-        console.log(params);
-
         return {
           url: `/products/${params}`,
           method: 'GET',

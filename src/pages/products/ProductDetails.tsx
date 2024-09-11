@@ -38,7 +38,6 @@ const ProductDetails = () => {
 
   const image = data.data.image;
   const dat = data.data;
-  console.log(user.email);
 
   const hendelProductsInfo = () => {
     const productsInfo = {
