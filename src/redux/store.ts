@@ -1,5 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './fetures/auth/authSlice';
+import UserInfoReducer from './fetures/users/userSlice';
+import ProductsCheakoutReducer from './fetures/products/productsSlice';
 import { baseApi } from './api/baseApi';
 import {
   FLUSH,
@@ -17,13 +19,31 @@ const presistConfig = {
   key: `auth`,
   storage,
 };
+const presistConfigUserInfo = {
+  key: `UserInfo`,
+  storage,
+};
+const presistConfigProductsInfo = {
+  key: `ProductsInfo`,
+  storage,
+};
 
 const persistAuthReducer = persistReducer(presistConfig, authReducer);
+const persistUserInfoReducer = persistReducer(
+  presistConfigUserInfo,
+  UserInfoReducer,
+);
+const persistProductsInfoReducer = persistReducer(
+  presistConfigProductsInfo,
+  ProductsCheakoutReducer,
+);
 
 export const store = configureStore({
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
     auth: persistAuthReducer,
+    UserInfo: persistUserInfoReducer,
+    ProductsInfo: persistProductsInfoReducer,
   },
   middleware: getDefaultMiddlewares =>
     getDefaultMiddlewares({

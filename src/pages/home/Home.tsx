@@ -31,7 +31,10 @@ const Home = () => {
         </div>
       </div>
       <div className="flex justify-center">
-        <Button href="/products" className="-mt-8 btn-outline">
+        <Button
+          href="/products"
+          className="-mt-8 btn-outlinen bg-[#001529] text-white"
+        >
           See more
         </Button>
       </div>

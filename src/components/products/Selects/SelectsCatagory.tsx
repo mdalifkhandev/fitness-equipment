@@ -14,7 +14,7 @@ const SelectsCatagory = ({ setValues }: any) => {
     return options;
   });
   const handleChange = (value: any) => {
-    const valueArray=(value.map((val:any)=>val.value));
+    const valueArray = value.map((val: any) => val.value);
     setValues(valueArray);
   };
 
@@ -23,7 +23,7 @@ const SelectsCatagory = ({ setValues }: any) => {
       <Select
         mode="multiple"
         allowClear
-        className='w-10'
+        className="w-10"
         style={{ width: '100%' }}
         labelInValue
         placeholder="Catagory"

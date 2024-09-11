@@ -14,7 +14,7 @@ const Searchs = ({ setSearch }: any) => {
     <div>
       <Space direction="vertical">
         <Search
-          placeholder="input search text"
+          placeholder="Products search by name"
           allowClear
           enterButton="Search"
           size="large"

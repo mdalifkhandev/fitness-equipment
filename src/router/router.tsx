@@ -7,6 +7,7 @@ import { routerGenerator } from '@/utils/routerGenerator';
 import { profilePath } from './profileRoute';
 import ProductDetails from '@/pages/products/ProductDetails';
 import Products from '@/pages/products/Products';
+import CheakOut from '@/pages/cheakout/CheakOut';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: 'products/:id',
         element: <ProductDetails />,
+      },
+      {
+        path: 'products/cheakout/:id',
+        element: <CheakOut />,
       },
       {
         path: '/products/:catagory',

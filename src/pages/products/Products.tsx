@@ -15,10 +15,10 @@ const Products = () => {
     catagory,
     search,
     minPrice,
-    maxPrice
+    maxPrice,
   };
-  console.log(minPrice,maxPrice);
-  
+  console.log(minPrice, maxPrice);
+
   const { data } = useGetProductsQuery(query);
 
   if (!data) {
@@ -30,11 +30,11 @@ const Products = () => {
     <div>
       <div className="flex justify-between">
         <div>
-        <SelectsCatagory setValues={setCatagory} />
+          <SelectsCatagory setValues={setCatagory} />
         </div>
         <div>
           <PriceRange setMixPrice={setMaxPrice} setMinPrice={setMinPrice} />
-        </div> 
+        </div>
         <div>
           <Searchs setSearch={setSearch} />
         </div>

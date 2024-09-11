@@ -2,34 +2,55 @@
 import { useCurrentToken } from '@/redux/fetures/auth/authSlice';
 import { useCreateAddToCardMutation } from '@/redux/fetures/products/cardProcuct';
 import { useGetSingleProductsQuery } from '@/redux/fetures/products/productsApi';
-import { useAppSelector } from '@/redux/hooks';
+import { setProductsCheakout } from '@/redux/fetures/products/productsSlice';
+import { setUserInfo } from '@/redux/fetures/users/userSlice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Images from '@/utils/Image';
 import Loding from '@/utils/Loding';
 import { verifyToken } from '@/utils/verifyToken';
 import { Button, Rate } from 'antd';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 
 const ProductDetails = () => {
   const { id } = useParams();
   const { data } = useGetSingleProductsQuery(id);
-  const token = useAppSelector(useCurrentToken) || ' ';
+  const token = useAppSelector(useCurrentToken);
   const [CardData] = useCreateAddToCardMutation();
-  const [quentity,setQuentity]=useState(1)
+  const [quentity, setQuentity] = useState(1);
+  const dispatch = useAppDispatch();
 
-  if (!data) {
-    return <Loding />;
-  }
   if (!token) {
+    return (
+      <div>
+        <Loding />
+        <Link className="text-3xl flex justify-center" to={`/login`}>
+          Please Login to Click
+        </Link>
+      </div>
+    );
+  }
+  if (!data) {
     return <Loding />;
   }
   const user: any = verifyToken(token);
 
   const image = data.data.image;
   const dat = data.data;
-  console.log(dat);
+  console.log(user.email);
 
+  const hendelProductsInfo = () => {
+    const productsInfo = {
+      productId: dat._id,
+      quentity: quentity,
+    };
+    const userInfo = {
+      email: user.email,
+    };
+    dispatch(setProductsCheakout(productsInfo), setUserInfo(userInfo));
+    // dispatch(setUserInfo(userInfo))
+  };
   const handleAddToCard = async () => {
     const addToCardInfo = {
       name: dat.name,
@@ -86,10 +107,26 @@ const ProductDetails = () => {
           <div className="my-3">
             <h1>Shipping calculated at checkout.</h1>
           </div>
-          <div> <span className='mr-3'>Quentity : </span>
-            <Button disabled={quentity===dat.instock} onClick={()=>{setQuentity(quentity+1)}}>+</Button>
-<span className='mx-5'>{quentity}</span>
-            <Button disabled={quentity===1} onClick={()=>{setQuentity(quentity-1)}}>-</Button>
+          <div>
+            {' '}
+            <span className="mr-3">Quentity : </span>
+            <Button
+              disabled={quentity === dat.instock}
+              onClick={() => {
+                setQuentity(quentity + 1);
+              }}
+            >
+              +
+            </Button>
+            <span className="mx-5">{quentity}</span>
+            <Button
+              disabled={quentity === 1}
+              onClick={() => {
+                setQuentity(quentity - 1);
+              }}
+            >
+              -
+            </Button>
           </div>
           <h1 className="divider pt-4"></h1>
           <div>
@@ -103,9 +140,11 @@ const ProductDetails = () => {
           <div className="mb-14">
             <Button
               disabled={dat.instock === 0}
+              href={`/products/cheakout/${dat._id}`}
+              onClick={hendelProductsInfo}
               className="w-full my-3 btn bg-[#3C0DEF] text-white"
             >
-              BUY NOW
+              CHECKOUT
             </Button>
           </div>
           <div>

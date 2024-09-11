@@ -9,7 +9,35 @@ const userhApi = baseApi.injectEndpoints({
         body: userInfo,
       }),
     }),
+    createUserInfo: builder.mutation({
+      query: userInfo => ({
+        url: '/users/cteate-user-info',
+        method: 'POST',
+        body: userInfo,
+      }),
+    }),
+    getUserInfo: builder.query({
+      query: ({ email }) => {
+        return {
+          url: `/users/user-info?email=${email}`,
+          method: 'GET',
+        };
+      },
+    }),
+    getUser: builder.query({
+      query: ({ email }) => {
+        return {
+          url: `/users/user?email=${email}`,
+          method: 'GET',
+        };
+      },
+    }),
   }),
 });
 
-export const { useCreateUserMutation } = userhApi;
+export const {
+  useCreateUserMutation,
+  useCreateUserInfoMutation,
+  useGetUserInfoQuery,
+  useGetUserQuery,
+} = userhApi;
