@@ -10,6 +10,14 @@ import {
   useGetUserQuery,
 } from '@/redux/fetures/users/userApi';
 import PaymentCatchOn from '../payment/PaymentCatchOn';
+import PaymentOnCard from '../payment/PaymentOnCard';
+import { loadStripe, Stripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+import { selectMyCard } from '@/redux/fetures/mycard/cardSlice';
+
+const stripepk = import.meta.env.VITE_SECRET_KEY;
+
+const stripePromis: Promise<Stripe | null> = loadStripe(stripepk);
 
 type TDeleveryProductInfo = {
   userName: string;
@@ -30,6 +38,7 @@ type TDeleveryProductInfo = {
 const CheakOut = () => {
   const { productId, quentity } = useAppSelector(useCurrentProductsInfo);
   const { email } = useAppSelector(useCurrentUserInfo);
+  const  mycard = useAppSelector(selectMyCard);
   const { data } = useGetSingleProductsQuery(productId);
   const { data: getuserinfo } = useGetUserInfoQuery({ email });
   const { data: getuser } = useGetUserQuery({ email });
@@ -49,6 +58,7 @@ const CheakOut = () => {
 
   const product = data?.data;
   // console.log(productId, product);
+console.log(mycard);
 
   const shipping = Math.ceil(
     (product?.price / 100) * 2 * (quentity || 1) > 10
@@ -91,34 +101,43 @@ const CheakOut = () => {
                 </p>
 
                 <p className="flex justify-between mt-3 font-bold">
-                  <span>User Name : </span>
+                  <span>Your Name : </span>
                   <span>
                     {getuser.data.firstName} {getuser.data.lestName}
                   </span>
                 </p>
                 <p className="flex justify-between mt-3 font-bold">
-                  <span>User Phon Number : </span>
+                  <span>Your Email : </span>
+                  <span>
+                    {email}
+                  </span>
+                </p>
+                <p className="flex justify-between mt-3 font-bold">
+                  <span>Your Phon Number : </span>
                   <span>{getuserinfo.data.phone} </span>
                 </p>
                 <p className="flex justify-between mt-3 font-bold">
-                  <span>User dividion : </span>
+                  <span>Your dividion : </span>
                   <span>{getuserinfo.data.division} </span>
                 </p>
                 <p className="flex justify-between mt-3 font-bold">
-                  <span>User distric : </span>
+                  <span>Your distric : </span>
                   <span>{getuserinfo.data.distric} </span>
                 </p>
                 <p className="flex justify-between mt-3 font-bold">
-                  <span>User upzela : </span>
+                  <span>Your upzela : </span>
                   <span>{getuserinfo.data.upzala} </span>
                 </p>
                 <p className="flex justify-between mt-3 font-bold">
-                  <span>User address : </span>
+                  <span>Your address : </span>
                   <span>{getuserinfo.data.detailsAddress} </span>
                 </p>
               </div>
-              <div className="m-5 p-5 shadow-2xl">
+              <div className="m-5 p-5 shadow-2xl flex justify-between gap-5">
                 <PaymentCatchOn deleveryProductsInfo={deleveryProductsInfo} />
+                <Elements stripe={stripePromis}>
+                  <PaymentOnCard deleveryProductsInfo={deleveryProductsInfo} />
+                </Elements>
               </div>
             </>
           ) : (

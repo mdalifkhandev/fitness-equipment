@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useCreateOrderDataMutation } from '@/redux/fetures/orderData/orderDataApi';
+import { useCreateOrderDataMutation, usePaymentIntentPriceMutation } from '@/redux/fetures/orderData/orderDataApi';
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { Button, Drawer } from 'antd';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-const PaymentCatchOn = ({ deleveryProductsInfo }: any) => {
+const PaymentOnCard = ({ deleveryProductsInfo }: any) => {
   const [dataPost] = useCreateOrderDataMutation();
+  const [paymentintentprice]=usePaymentIntentPriceMutation()
   // const [dataPost,{data }]=useCreateOrderDataMutation()
   const {
     userName,
@@ -24,6 +26,8 @@ const PaymentCatchOn = ({ deleveryProductsInfo }: any) => {
   } = deleveryProductsInfo;
 
   const [open, setOpen] = useState(false);
+  const stripe = useStripe();
+  const element=useElements()
 
   const showDrawer = () => {
     setOpen(true);
@@ -33,31 +37,77 @@ const PaymentCatchOn = ({ deleveryProductsInfo }: any) => {
     setOpen(false);
   };
 
-  const hendleProcessOrder = async () => {
-    const orderData = {
-      userName,
-      userPhone,
-      userEmail,
-      userDivision,
-      userDistric,
-      userUpzala,
-      userAddress,
-      productsImage,
-      productsName,
-      productsPrice,
-      productsQuentity,
-      productsShipping,
-      productsTotalPrice,
-    };
 
-    // console.log(orderData);
-    try {
-      const data = await dataPost(orderData).unwrap();
-      toast.success(data.message);
-    } catch (error: any) {
-      toast.error(error.message);
+  const handleSubmit=async(event:any)=>{
+    setOpen(false)
+    event.preventDefault()
+    const price={
+      price:productsPrice
     }
-  };
+    const claint_secret= await paymentintentprice(price).unwrap()
+
+      if(claint_secret){
+        if (!stripe || !element) {
+          return
+        }
+        const card=element.getElement(CardElement)
+        if(card===null){
+          return
+        }
+        const {error
+        }=await stripe.createPaymentMethod({
+          type:'card',
+          card
+        })
+        if(error){
+          toast.error('payment information invalid')
+        }
+
+
+        const {paymentIntent,error:confirmError}=await stripe.confirmCardPayment(
+          claint_secret.data,{
+            payment_method:{
+              card:card,
+              billing_details:{
+                name:userName,
+                email:userEmail
+              }
+            }
+          }
+        )
+
+
+        if(confirmError){
+          toast.error('payment information invalid')
+        }
+
+        if(paymentIntent?.status==='succeeded'){
+          const paymentDetails={
+            userName,
+    userEmail,
+    userPhone,
+    userDivision,
+    userDistric,
+    userUpzala,
+    userAddress,
+    productsImage,
+    productsName,
+    productsPrice,
+    productsQuentity,
+    productsShipping,
+    productsTotalPrice,
+          }
+          const datapost=await dataPost(paymentDetails)
+          toast.success(datapost.data.message);
+          
+        }
+
+      }
+  }
+  
+
+     
+            
 
   return (
     <div>
@@ -80,7 +130,7 @@ const PaymentCatchOn = ({ deleveryProductsInfo }: any) => {
             />
           </svg>
 
-          <h1>Catch on Dalevary</h1>
+          <h1>Pay As Stripe</h1>
         </div>
       </Button>
       <Drawer
@@ -89,11 +139,12 @@ const PaymentCatchOn = ({ deleveryProductsInfo }: any) => {
         onClose={onClose}
         open={open}
       >
-        <div className="flex justify-between px-52 items-center">
+        <div className="flex gap-28 items-center">
           <div>
             <p>Address </p>
             <div>
               <p> {userName} </p>
+              <p> {userEmail} </p>
               <p> {userPhone}</p>
               <p> {userDivision} </p>
               <p> {userDistric} </p>
@@ -112,16 +163,17 @@ const PaymentCatchOn = ({ deleveryProductsInfo }: any) => {
               <p>Total Price : {productsTotalPrice + productsShipping} </p>
             </div>
           </div>
-          <Button
-            onClick={hendleProcessOrder}
-            className="bg-[#001529] text-white"
-          >
-            <p onClick={onClose}>Process Order</p>
-          </Button>
+
+          <form onSubmit={handleSubmit} className="w-72 ">
+            <CardElement />
+            <button type="submit" className="btn mt-5" disabled={!stripe }>
+              Pay ${productsPrice}
+            </button>
+          </form>
         </div>
       </Drawer>
     </div>
   );
 };
 
-export default PaymentCatchOn;
+export default PaymentOnCard;

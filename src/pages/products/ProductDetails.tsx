@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCurrentToken } from '@/redux/fetures/auth/authSlice';
-import { useCreateAddToCardMutation } from '@/redux/fetures/products/cardProcuct';
+import { useCreateAddToCardMutation } from '@/redux/fetures/mycard/cardProcuct';
 import { useGetSingleProductsQuery } from '@/redux/fetures/products/productsApi';
 import { setProductsCheakout } from '@/redux/fetures/products/productsSlice';
 import { setUserInfo } from '@/redux/fetures/users/userSlice';

@@ -11,7 +11,18 @@ const orderDataApi = baseApi.injectEndpoints({
         };
       },
     }),
+    paymentIntentPrice: builder.mutation({
+      query: price => {
+        console.log(price);
+        
+        return {
+          url: '/order/payment-intent',
+          method: 'POST',
+          body: price,
+        };
+      },
+    }),
   }),
 });
 
-export const { useCreateOrderDataMutation } = orderDataApi;
+export const { useCreateOrderDataMutation,usePaymentIntentPriceMutation } = orderDataApi;

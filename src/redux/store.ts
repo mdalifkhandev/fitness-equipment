@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './fetures/auth/authSlice';
 import UserInfoReducer from './fetures/users/userSlice';
 import ProductsCheakoutReducer from './fetures/products/productsSlice';
+import MyCardReducer from './fetures/mycard/cardSlice';
 import { baseApi } from './api/baseApi';
 import {
   FLUSH,
@@ -14,6 +15,7 @@ import {
   REHYDRATE,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { paymentReducer } from './fetures/orderData/payment/paymentReducer';
 
 const presistConfig = {
   key: `auth`,
@@ -27,6 +29,10 @@ const presistConfigProductsInfo = {
   key: `ProductsInfo`,
   storage,
 };
+const presistConfigMyCard = {
+  key: `mycard`,
+  storage,
+};
 
 const persistAuthReducer = persistReducer(presistConfig, authReducer);
 const persistUserInfoReducer = persistReducer(
@@ -37,6 +43,10 @@ const persistProductsInfoReducer = persistReducer(
   presistConfigProductsInfo,
   ProductsCheakoutReducer,
 );
+const persistMyCardReducer = persistReducer(
+  presistConfigMyCard,
+  MyCardReducer,
+);
 
 export const store = configureStore({
   reducer: {
@@ -44,6 +54,8 @@ export const store = configureStore({
     auth: persistAuthReducer,
     UserInfo: persistUserInfoReducer,
     ProductsInfo: persistProductsInfoReducer,
+    payment: paymentReducer,
+    MyCard:persistMyCardReducer
   },
   middleware: getDefaultMiddlewares =>
     getDefaultMiddlewares({
