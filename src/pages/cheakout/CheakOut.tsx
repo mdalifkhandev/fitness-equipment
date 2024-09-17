@@ -78,7 +78,6 @@ const CheakOut = () => {
       (quentity || 1),
   );
 
-  
   const deleveryProductsInfo: TDeleveryProductInfo = {
     userName: `${getuser.data.firstName} ${getuser.data.lestName}`,
     userEmail: email,
@@ -92,7 +91,7 @@ const CheakOut = () => {
     productsPrice: productPrice,
     productsQuentity: quentity || 1,
     productsShipping: shipping,
-    productsTotalPrice: totalPrice+shipping,
+    productsTotalPrice: totalPrice + shipping,
     productsID: product._id,
   };
 

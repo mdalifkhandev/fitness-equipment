@@ -37,16 +37,13 @@ const orderDataApi = baseApi.injectEndpoints({
       },
     }),
     deletedOrderData: builder.mutation({
-      query:  id  => {
+      query: id => {
         return {
           url: `/order/cancel-order?id=${id}`,
           method: 'DELETE',
         };
       },
     }),
-
-
-
   }),
 });
 
@@ -55,5 +52,5 @@ export const {
   usePaymentIntentPriceMutation,
   useGetOrderDataQuery,
   useDeletedOrderDataMutation,
-  useGetCancelOrderDataQuery
+  useGetCancelOrderDataQuery,
 } = orderDataApi;
