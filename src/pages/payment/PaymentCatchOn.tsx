@@ -21,6 +21,7 @@ const PaymentCatchOn = ({ deleveryProductsInfo }: any) => {
     productsQuentity,
     productsShipping,
     productsTotalPrice,
+    productsID,
   } = deleveryProductsInfo;
 
   const [open, setOpen] = useState(false);
@@ -48,14 +49,15 @@ const PaymentCatchOn = ({ deleveryProductsInfo }: any) => {
       productsQuentity,
       productsShipping,
       productsTotalPrice,
+      productsID,
     };
 
     // console.log(orderData);
     try {
       const data = await dataPost(orderData).unwrap();
-      toast.success(data.message);
+      toast.success(data?.message);
     } catch (error: any) {
-      toast.error(error.message);
+      toast.error(error?.message);
     }
   };
 

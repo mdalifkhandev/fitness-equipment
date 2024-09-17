@@ -1,16 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useCurrentToken } from '@/redux/fetures/auth/authSlice';
 import {
   useGetAddToCardQuery,
   useRemoveToCardMutation,
 } from '@/redux/fetures/mycard/cardProcuct';
+import { useAppSelector } from '@/redux/hooks';
 import DataNotFound from '@/utils/DataNotFound';
 import Loding from '@/utils/Loding';
+import { verifyToken } from '@/utils/verifyToken';
 import { Button, Card, Checkbox } from 'antd';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
 const MyCard = () => {
-  const { data } = useGetAddToCardQuery(undefined);
+  const token: any = useAppSelector(useCurrentToken);
+  const user: any = verifyToken(token);
+  const email = {
+    email: user.email,
+  };
+  const { data } = useGetAddToCardQuery(email);
   const [remove] = useRemoveToCardMutation();
   const [quentity, setQuentity] = useState<Record<string, number>>({});
   const [clicked, setClicked] = useState<Record<string, boolean>>({});
@@ -27,7 +35,7 @@ const MyCard = () => {
   if (data.data.length === 0) {
     return <DataNotFound />;
   }
-  const totalPrice:number = data.data.reduce((sum: number, card: any) => {
+  const totalPrice: number = data.data.reduce((sum: number, card: any) => {
     const isChecked = selectedItems[card._id];
     const quantity = quentity[card._id] || 1;
     return isChecked
@@ -67,8 +75,12 @@ const MyCard = () => {
     }));
   };
 
-const totalSelectItemId=Object.keys(selectedItems).filter(id => selectedItems[id]);
-const shipping: number = Math.floor((totalPrice / 100) > 10 ? (totalPrice / 100) : 10)
+  const totalSelectItemId = Object.keys(selectedItems).filter(
+    id => selectedItems[id],
+  );
+  const shipping: number = Math.floor(
+    totalPrice / 100 > 10 ? totalPrice / 100 : 10,
+  );
 
   return (
     <div className="grid grid-cols-7 relative">
@@ -83,7 +95,7 @@ const shipping: number = Math.floor((totalPrice / 100) > 10 ? (totalPrice / 100)
             <div className="grid grid-cols-12 gap-5 items-center">
               <div className="col-span-1">
                 <Checkbox
-                disabled={card.instock===0}
+                  disabled={card.instock === 0}
                   checked={card.instock > 0 ? !!selectedItems[card._id] : false}
                   onChange={e => {
                     hendleCheakboxChange(card._id, e.target.checked);
@@ -192,24 +204,20 @@ const shipping: number = Math.floor((totalPrice / 100) > 10 ? (totalPrice / 100)
             </div>
             <div className="flex justify-between mt-5">
               <p>Shipping Free</p>
-              <p>
-                {shipping}
-              </p>
+              <p>{shipping}</p>
             </div>
             <div className="flex justify-between mt-5">
               <p>Shipping fee is minimum 10$ and maximum 1% of total price. </p>
             </div>
             <div className="flex justify-between font-bold mt-5">
               <p>Total Price</p>
-              <p>
-                {totalItems? shipping+totalPrice :0}
-              </p>
+              <p>{totalItems ? shipping + totalPrice : 0}</p>
             </div>
-            <Button 
-              href={`/products/cheakout/${totalSelectItemId[0]}`} 
+            <Button
+              href={`/products/cheakout/${totalSelectItemId[0]}`}
               disabled={!totalSelectItemId.length}
-               className="w-full mt-5 bg-[#001529] text-white"
-               >
+              className="w-full mt-5 bg-[#001529] text-white"
+            >
               CheakOut
             </Button>
           </div>

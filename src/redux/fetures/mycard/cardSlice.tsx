@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '@/redux/store'; 
+import { RootState } from '@/redux/store';
 
 const initialState: string[] = [];
 
@@ -8,7 +8,7 @@ const myCardSlice = createSlice({
   initialState,
   reducers: {
     setMyCard: (state, action: PayloadAction<string[]>) => {
-      state.push(...action.payload); 
+      state.push(...action.payload);
     },
   },
 });

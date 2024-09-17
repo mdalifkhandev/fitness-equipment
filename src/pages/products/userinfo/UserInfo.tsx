@@ -1,15 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useCreateUserInfoMutation } from '@/redux/fetures/users/userApi';
 import { Button, Form, FormProps, Input, Modal } from 'antd';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 type FieldType = {
-  username?: string;
-  password?: string;
-  remember?: string;
-};
-
-const onFinish: FormProps<FieldType>['onFinish'] = values => {
-  // eslint-disable-next-line no-console
-  console.log('Success:', values);
+  phonNumber?: string;
+  division?: string;
+  distric?: string;
+  upzelea?: string;
+  address?: string;
 };
 
 const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = errorInfo => {
@@ -17,7 +17,26 @@ const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = errorInfo => {
   console.log('Failed:', errorInfo);
 };
 
-const UserInfo = () => {
+const UserInfo = (props: any) => {
+  const { userId, email } = props.modalData;
+  const [updathUserIifo] = useCreateUserInfoMutation();
+
+  const onFinish: FormProps<FieldType>['onFinish'] = values => {
+    // console.log('Success:', values);
+
+    const userInfo = {
+      userID: userId,
+      email,
+      phone: values.phonNumber,
+      division: values.division,
+      distric: values.distric,
+      upzala: values.upzelea,
+      detailsAddress: values.address,
+    };
+    updathUserIifo(userInfo).unwrap();
+    toast.success('user info created successfully');
+  };
+
   const [isModalVisible, setIsModalVisible] = useState(true);
 
   // Functions to open and close the modal
@@ -26,6 +45,9 @@ const UserInfo = () => {
   };
 
   const handleClose = () => {
+    setIsModalVisible(false);
+  };
+  const handleSubmit = () => {
     setIsModalVisible(false);
   };
 
@@ -55,27 +77,52 @@ const UserInfo = () => {
             autoComplete="off"
           >
             <Form.Item<FieldType>
-              label="Username"
-              name="username"
+              label="Phone Number"
+              name="phonNumber"
               rules={[
-                { required: true, message: 'Please input your username!' },
+                { required: true, message: 'Please input your Phone Number!' },
               ]}
             >
               <Input />
             </Form.Item>
 
             <Form.Item<FieldType>
-              label="Password"
-              name="password"
+              label="Division"
+              name="division"
               rules={[
-                { required: true, message: 'Please input your password!' },
+                { required: true, message: 'Please input your Division!' },
               ]}
             >
-              <Input.Password />
+              <Input />
+            </Form.Item>
+            <Form.Item<FieldType>
+              label="Distric"
+              name="distric"
+              rules={[
+                { required: true, message: 'Please input your Distric!' },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item<FieldType>
+              label="Upzela"
+              name="upzelea"
+              rules={[{ required: true, message: 'Please input your Upzela!' }]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item<FieldType>
+              label="Address"
+              name="address"
+              rules={[
+                { required: true, message: 'Please input your Address!' },
+              ]}
+            >
+              <Input />
             </Form.Item>
 
             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-              <Button onClick={handleClose} type="primary" htmlType="submit">
+              <Button onClick={handleSubmit} type="primary" htmlType="submit">
                 Submit
               </Button>
             </Form.Item>

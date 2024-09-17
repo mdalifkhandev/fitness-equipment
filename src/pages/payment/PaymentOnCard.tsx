@@ -1,13 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useCreateOrderDataMutation, usePaymentIntentPriceMutation } from '@/redux/fetures/orderData/orderDataApi';
+import {
+  useCreateOrderDataMutation,
+  usePaymentIntentPriceMutation,
+} from '@/redux/fetures/orderData/orderDataApi';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { Button, Drawer } from 'antd';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-const PaymentOnCard = ({ deleveryProductsInfo }: any) => {
+const PaymentOnCard = ({ deleveryProductsInfo, setId }: any) => {
   const [dataPost] = useCreateOrderDataMutation();
-  const [paymentintentprice]=usePaymentIntentPriceMutation()
+  const [paymentintentprice] = usePaymentIntentPriceMutation();
   // const [dataPost,{data }]=useCreateOrderDataMutation()
   const {
     userName,
@@ -23,11 +26,12 @@ const PaymentOnCard = ({ deleveryProductsInfo }: any) => {
     productsQuentity,
     productsShipping,
     productsTotalPrice,
+    productsID,
   } = deleveryProductsInfo;
 
   const [open, setOpen] = useState(false);
   const stripe = useStripe();
-  const element=useElements()
+  const element = useElements();
 
   const showDrawer = () => {
     setOpen(true);
@@ -37,77 +41,69 @@ const PaymentOnCard = ({ deleveryProductsInfo }: any) => {
     setOpen(false);
   };
 
+  const handleSubmit = async (event: any) => {
+    setOpen(false);
+    event.preventDefault();
+    const price = {
+      price: productsPrice,
+    };
+    const claint_secret = await paymentintentprice(price).unwrap();
 
-  const handleSubmit=async(event:any)=>{
-    setOpen(false)
-    event.preventDefault()
-    const price={
-      price:productsPrice
-    }
-    const claint_secret= await paymentintentprice(price).unwrap()
-
-      if(claint_secret){
-        if (!stripe || !element) {
-          return
-        }
-        const card=element.getElement(CardElement)
-        if(card===null){
-          return
-        }
-        const {error
-        }=await stripe.createPaymentMethod({
-          type:'card',
-          card
-        })
-        if(error){
-          toast.error('payment information invalid')
-        }
-
-
-        const {paymentIntent,error:confirmError}=await stripe.confirmCardPayment(
-          claint_secret.data,{
-            payment_method:{
-              card:card,
-              billing_details:{
-                name:userName,
-                email:userEmail
-              }
-            }
-          }
-        )
-
-
-        if(confirmError){
-          toast.error('payment information invalid')
-        }
-
-        if(paymentIntent?.status==='succeeded'){
-          const paymentDetails={
-            userName,
-    userEmail,
-    userPhone,
-    userDivision,
-    userDistric,
-    userUpzala,
-    userAddress,
-    productsImage,
-    productsName,
-    productsPrice,
-    productsQuentity,
-    productsShipping,
-    productsTotalPrice,
-          }
-          const datapost=await dataPost(paymentDetails)
-          toast.success(datapost.data.message);
-          
-        }
-
+    if (claint_secret) {
+      if (!stripe || !element) {
+        return;
       }
-  }
-  
+      const card = element.getElement(CardElement);
+      if (card === null) {
+        return;
+      }
+      const { error } = await stripe.createPaymentMethod({
+        type: 'card',
+        card,
+      });
+      if (error) {
+        toast.error('payment information invalid');
+      }
 
-     
-            
+      const { paymentIntent, error: confirmError } =
+        await stripe.confirmCardPayment(claint_secret.data, {
+          payment_method: {
+            card: card,
+            billing_details: {
+              name: userName,
+              email: userEmail,
+            },
+          },
+        });
+
+      if (confirmError) {
+        toast.error('payment information invalid');
+      }
+
+      if (paymentIntent?.status === 'succeeded') {
+        const paymentDetails = {
+          userName,
+          userEmail,
+          userPhone,
+          userDivision,
+          userDistric,
+          userUpzala,
+          userAddress,
+          productsImage,
+          productsName,
+          productsPrice,
+          productsQuentity,
+          productsShipping,
+          productsTotalPrice,
+          productsID,
+          paymentID: paymentIntent.id,
+        };
+        const datapost = await dataPost(paymentDetails);
+        toast.success(datapost?.data?.message);
+        setId(datapost.data.data.paymentID);
+      }
+    }
+  };
 
   return (
     <div>
@@ -166,7 +162,7 @@ const PaymentOnCard = ({ deleveryProductsInfo }: any) => {
 
           <form onSubmit={handleSubmit} className="w-72 ">
             <CardElement />
-            <button type="submit" className="btn mt-5" disabled={!stripe }>
+            <button type="submit" className="btn mt-5" disabled={!stripe}>
               Pay ${productsPrice}
             </button>
           </form>

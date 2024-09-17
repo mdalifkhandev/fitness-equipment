@@ -10,11 +10,13 @@ const userhApi = baseApi.injectEndpoints({
       }),
     }),
     createUserInfo: builder.mutation({
-      query: userInfo => ({
-        url: '/users/cteate-user-info',
-        method: 'POST',
-        body: userInfo,
-      }),
+      query: userInfo => {
+        return {
+          url: '/users/cteate-user-info',
+          method: 'POST',
+          body: userInfo,
+        };
+      },
     }),
     getUserInfo: builder.query({
       query: ({ email }) => {

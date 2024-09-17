@@ -13,8 +13,6 @@ const orderDataApi = baseApi.injectEndpoints({
     }),
     paymentIntentPrice: builder.mutation({
       query: price => {
-        console.log(price);
-        
         return {
           url: '/order/payment-intent',
           method: 'POST',
@@ -22,7 +20,40 @@ const orderDataApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getOrderData: builder.query({
+      query: ({ email }) => {
+        return {
+          url: `/order/get-order-data?email=${email}`,
+          method: 'GET',
+        };
+      },
+    }),
+    getCancelOrderData: builder.query({
+      query: ({ email }) => {
+        return {
+          url: `/order/get-cancel-data?email=${email}`,
+          method: 'GET',
+        };
+      },
+    }),
+    deletedOrderData: builder.mutation({
+      query:  id  => {
+        return {
+          url: `/order/cancel-order?id=${id}`,
+          method: 'DELETE',
+        };
+      },
+    }),
+
+
+
   }),
 });
 
-export const { useCreateOrderDataMutation,usePaymentIntentPriceMutation } = orderDataApi;
+export const {
+  useCreateOrderDataMutation,
+  usePaymentIntentPriceMutation,
+  useGetOrderDataQuery,
+  useDeletedOrderDataMutation,
+  useGetCancelOrderDataQuery
+} = orderDataApi;

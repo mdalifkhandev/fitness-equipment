@@ -43,10 +43,7 @@ const persistProductsInfoReducer = persistReducer(
   presistConfigProductsInfo,
   ProductsCheakoutReducer,
 );
-const persistMyCardReducer = persistReducer(
-  presistConfigMyCard,
-  MyCardReducer,
-);
+const persistMyCardReducer = persistReducer(presistConfigMyCard, MyCardReducer);
 
 export const store = configureStore({
   reducer: {
@@ -55,7 +52,7 @@ export const store = configureStore({
     UserInfo: persistUserInfoReducer,
     ProductsInfo: persistProductsInfoReducer,
     payment: paymentReducer,
-    MyCard:persistMyCardReducer
+    MyCard: persistMyCardReducer,
   },
   middleware: getDefaultMiddlewares =>
     getDefaultMiddlewares({

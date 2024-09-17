@@ -13,7 +13,7 @@ import PaymentCatchOn from '../payment/PaymentCatchOn';
 import PaymentOnCard from '../payment/PaymentOnCard';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
-import { selectMyCard } from '@/redux/fetures/mycard/cardSlice';
+import { useState } from 'react';
 
 const stripepk = import.meta.env.VITE_SECRET_KEY;
 
@@ -33,15 +33,22 @@ type TDeleveryProductInfo = {
   productsQuentity: number;
   productsShipping: number;
   productsTotalPrice: number;
+  productsID: string;
 };
 
 const CheakOut = () => {
   const { productId, quentity } = useAppSelector(useCurrentProductsInfo);
   const { email } = useAppSelector(useCurrentUserInfo);
-  const  mycard = useAppSelector(selectMyCard);
   const { data } = useGetSingleProductsQuery(productId);
   const { data: getuserinfo } = useGetUserInfoQuery({ email });
   const { data: getuser } = useGetUserQuery({ email });
+  const [id, setId] = useState();
+
+  const userId = getuser?.data?._id;
+  const modelData = {
+    userId,
+    email,
+  };
 
   if (!data) {
     return <Loding />;
@@ -49,16 +56,14 @@ const CheakOut = () => {
   if (!getuser) {
     return <Loding />;
   }
-  if (!getuserinfo) {
-    return <Loding />;
-  }
+  // if (!getuserinfo) {
+  //   return <Loding />;
+  // }
   if (!email) {
     return <Loding />;
   }
 
   const product = data?.data;
-  // console.log(productId, product);
-console.log(mycard);
 
   const shipping = Math.ceil(
     (product?.price / 100) * 2 * (quentity || 1) > 10
@@ -72,20 +77,23 @@ console.log(mycard);
     (product?.price - (product?.price / 100) * product?.discount) *
       (quentity || 1),
   );
+
+  
   const deleveryProductsInfo: TDeleveryProductInfo = {
-    userName: `${getuser.data.firstName}, ${getuser.data.lestName}`,
+    userName: `${getuser.data.firstName} ${getuser.data.lestName}`,
     userEmail: email,
-    userPhone: getuserinfo.data.phone,
-    userDivision: getuserinfo.data.division,
-    userDistric: getuserinfo.data.distric,
-    userUpzala: getuserinfo.data.upzala,
-    userAddress: getuserinfo.data.detailsAddress,
+    userPhone: getuserinfo?.data.phone,
+    userDivision: getuserinfo?.data.division,
+    userDistric: getuserinfo?.data.distric,
+    userUpzala: getuserinfo?.data.upzala,
+    userAddress: getuserinfo?.data.detailsAddress,
     productsImage: product.image.img1,
     productsName: product.name,
-    productsPrice: product.price,
+    productsPrice: productPrice,
     productsQuentity: quentity || 1,
     productsShipping: shipping,
-    productsTotalPrice: totalPrice,
+    productsTotalPrice: totalPrice+shipping,
+    productsID: product._id,
   };
 
   return (
@@ -108,42 +116,44 @@ console.log(mycard);
                 </p>
                 <p className="flex justify-between mt-3 font-bold">
                   <span>Your Email : </span>
-                  <span>
-                    {email}
-                  </span>
+                  <span>{email}</span>
                 </p>
                 <p className="flex justify-between mt-3 font-bold">
                   <span>Your Phon Number : </span>
-                  <span>{getuserinfo.data.phone} </span>
+                  <span>{getuserinfo?.data.phone} </span>
                 </p>
                 <p className="flex justify-between mt-3 font-bold">
                   <span>Your dividion : </span>
-                  <span>{getuserinfo.data.division} </span>
+                  <span>{getuserinfo?.data.division} </span>
                 </p>
                 <p className="flex justify-between mt-3 font-bold">
                   <span>Your distric : </span>
-                  <span>{getuserinfo.data.distric} </span>
+                  <span>{getuserinfo?.data.distric} </span>
                 </p>
                 <p className="flex justify-between mt-3 font-bold">
                   <span>Your upzela : </span>
-                  <span>{getuserinfo.data.upzala} </span>
+                  <span>{getuserinfo?.data.upzala} </span>
                 </p>
                 <p className="flex justify-between mt-3 font-bold">
                   <span>Your address : </span>
-                  <span>{getuserinfo.data.detailsAddress} </span>
+                  <span>{getuserinfo?.data.detailsAddress} </span>
                 </p>
               </div>
+
               <div className="m-5 p-5 shadow-2xl flex justify-between gap-5">
                 <PaymentCatchOn deleveryProductsInfo={deleveryProductsInfo} />
                 <Elements stripe={stripePromis}>
-                  <PaymentOnCard deleveryProductsInfo={deleveryProductsInfo} />
+                  <PaymentOnCard
+                    setId={setId}
+                    deleveryProductsInfo={deleveryProductsInfo}
+                  />
                 </Elements>
               </div>
             </>
           ) : (
             <>
               <p>Please give Your addres</p>
-              <UserInfo />
+              <UserInfo modalData={modelData} />
             </>
           )}
         </div>
@@ -172,6 +182,13 @@ console.log(mycard);
               {shipping + totalPrice}
             </p>
           </div>
+          {id ? (
+            <p className="mt-16 text-2xl font-bold text-green-800 text-center">
+              Payment id : {id}
+            </p>
+          ) : (
+            ''
+          )}
         </div>
       </div>
     </div>

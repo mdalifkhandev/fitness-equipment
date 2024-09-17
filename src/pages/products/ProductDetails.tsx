@@ -47,8 +47,8 @@ const ProductDetails = () => {
     const userInfo = {
       email: user.email,
     };
-    dispatch(setProductsCheakout(productsInfo), setUserInfo(userInfo));
-    // dispatch(setUserInfo(userInfo))
+    dispatch(setProductsCheakout(productsInfo));
+    dispatch(setUserInfo(userInfo));
   };
   const handleAddToCard = async () => {
     const addToCardInfo = {

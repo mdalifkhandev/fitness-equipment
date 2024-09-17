@@ -12,9 +12,9 @@ const createAddToCard = baseApi.injectEndpoints({
       },
     }),
     getAddToCard: builder.query({
-      query: () => {
+      query: ({ email }) => {
         return {
-          url: `/products/addtocard`,
+          url: `/products/addtocard?email=${email}`,
           method: 'GET',
         };
       },
