@@ -3,6 +3,7 @@ import About from '@/pages/about/About';
 import Contact from '@/pages/contact/Contact';
 import Home from '@/pages/home/Home';
 import Products from '@/pages/products/Products';
+import Managementa from '@/pages/productsManagmentnt/management/Managementa';
 
 export const userPath = [
   {
@@ -15,6 +16,11 @@ export const userPath = [
     name: 'All Shops',
     path: 'products',
     element: <Products />,
+  },
+  {
+    name: 'Products Management',
+    path: 'productsmanagement',
+    element: <Managementa />,
   },
   {
     name: 'About',

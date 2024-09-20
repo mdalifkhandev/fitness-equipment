@@ -27,6 +27,24 @@ const productsAPI = baseApi.injectEndpoints({
         method: 'GET',
       }),
     }),
+    deleteProducts: builders.mutation({
+      query: ({ id }) => {
+        return {
+          url: `/products/products-deleted?id=${id}`,
+          method: 'DELETE',
+        };
+      },
+    }),
+    updathProducts: builders.mutation({
+      query: ({id,userInfo}) => {
+        return {
+          url: `/products/updath-products?id=${id}`,
+          method: 'PUT',
+          body:userInfo
+        };
+      },
+    }),
+    //
   }),
 });
 
@@ -34,4 +52,6 @@ export const {
   useGetProductsQuery,
   useGetSingleProductsQuery,
   useGetProductsCatagoreQuery,
+  useDeleteProductsMutation,
+  useUpdathProductsMutation
 } = productsAPI;
