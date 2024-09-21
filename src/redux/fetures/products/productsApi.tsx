@@ -44,6 +44,17 @@ const productsAPI = baseApi.injectEndpoints({
         };
       },
     }),
+    createProducts: builders.mutation({
+      query: ({productData}) => {
+        console.log(productData);
+        
+        return {
+      url: `/products/create-products`,
+      method: 'POST',
+      body: productData,  
+    };
+      },
+    }),
     //
   }),
 });
@@ -53,5 +64,6 @@ export const {
   useGetSingleProductsQuery,
   useGetProductsCatagoreQuery,
   useDeleteProductsMutation,
-  useUpdathProductsMutation
+  useUpdathProductsMutation,
+  useCreateProductsMutation
 } = productsAPI;

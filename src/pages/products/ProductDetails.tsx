@@ -21,6 +21,7 @@ const ProductDetails = () => {
   const [quentity, setQuentity] = useState(1);
   const dispatch = useAppDispatch();
 
+  // If no token, prompt user to log in
   if (!token) {
     return (
       <div>
@@ -31,13 +32,21 @@ const ProductDetails = () => {
       </div>
     );
   }
+
+  // If no data, show loading
   if (!data) {
     return <Loding />;
   }
-  const user: any = verifyToken(token);
 
-  const image = data.data.image;
-  const dat = data.data;
+  const user: any = verifyToken(token);
+  const dat = data?.data;
+
+  // Ensure dat exists and is not null
+  if (!dat) {
+    return <Loding />;
+  }
+
+  const image = dat?.image;
 
   const hendelProductsInfo = () => {
     const productsInfo = {
@@ -50,24 +59,26 @@ const ProductDetails = () => {
     dispatch(setProductsCheakout(productsInfo));
     dispatch(setUserInfo(userInfo));
   };
+
   const handleAddToCard = async () => {
     const addToCardInfo = {
-      name: dat.name,
-      productID: dat._id,
+      name: dat?.name,
+      productID: dat?._id,
       email: user.email,
-      image: dat.image.img1,
-      rating: dat.rating,
-      price: dat.price,
-      discreption: dat.discreption,
+      image: dat?.image?.img1,
+      rating: dat?.rating,
+      price: dat?.price,
+      discreption: dat?.discreption,
       extarDiscreption: {
-        header: dat.extarDiscreption.header,
-        details: dat.extarDiscreption.details,
+        header: dat?.extarDiscreption?.header || '',
+        details: dat?.extarDiscreption?.details || '',
       },
-      catagory: dat.catagory,
-      review: dat.review,
-      instock: dat.instock,
-      discount: dat.discount,
+      catagory: dat?.catagory,
+      review: dat?.review,
+      instock: dat?.instock,
+      discount: dat?.discount,
     };
+
     try {
       const res = await CardData(addToCardInfo).unwrap();
       toast.success(res?.message);
@@ -81,25 +92,24 @@ const ProductDetails = () => {
       <div className="flex relative">
         <Images className="sticky top-5" img={image} />
         <div className="ml-16 mt-8">
-          <h1 className="text-4xl font-bold my-8">{dat.name}</h1>
+          <h1 className="text-4xl font-bold my-8">{dat?.name}</h1>
           <div className="flex gap-7">
-            <Rate allowHalf defaultValue={dat.rating} />
-            <span className="text-lg ml-1">{dat.review} Reviews</span>
+            <Rate allowHalf defaultValue={dat?.rating} />
+            <span className="text-lg ml-1">{dat?.review} Reviews</span>
           </div>
           <div className="flex gap-10 font-semibold ">
-            <span className="line-through">$ {dat.price}</span>
-            <span>$ {dat.price - (dat.price / 100) * dat.discount}</span>
-            <span className="text-red-600">Save {dat.discount} %</span>
+            <span className="line-through">$ {dat?.price}</span>
+            <span>$ {dat?.price - (dat?.price / 100) * dat?.discount}</span>
+            <span className="text-red-600">Save {dat?.discount} %</span>
           </div>
           <div className="my-3 text-xl">
-            <h1>Catagory: {dat.catagory}</h1>
+            <h1>Category: {dat?.catagory}</h1>
             <h1>
-              {' '}
-              Stock :{' '}
+              Stock:
               {dat.instock === 0 ? (
                 <span className="font-bold ">Stock out</span>
               ) : (
-                <span className="font-bold">{dat.instock}</span>
+                <span className="font-bold">{dat?.instock}</span>
               )}
             </h1>
           </div>
@@ -107,10 +117,9 @@ const ProductDetails = () => {
             <h1>Shipping calculated at checkout.</h1>
           </div>
           <div>
-            {' '}
-            <span className="mr-3">Quentity : </span>
+            <span className="mr-3">Quantity: </span>
             <Button
-              disabled={quentity === dat.instock}
+              disabled={quentity === dat?.instock}
               onClick={() => {
                 setQuentity(quentity + 1);
               }}
@@ -131,7 +140,7 @@ const ProductDetails = () => {
           <div>
             <Button
               onClick={handleAddToCard}
-              className=" w-full my-3 btn btn-outline text-black"
+              className="w-full my-3 btn btn-outline text-black"
             >
               ADD TO CARD
             </Button>
@@ -139,7 +148,7 @@ const ProductDetails = () => {
           <div className="mb-14">
             <Button
               disabled={dat.instock === 0}
-              href={`/products/cheakout/${dat._id}`}
+              href={`/products/checkout/${dat?._id}`}
               onClick={hendelProductsInfo}
               className="w-full my-3 btn bg-[#3C0DEF] text-white"
             >
@@ -147,31 +156,26 @@ const ProductDetails = () => {
             </Button>
           </div>
           <div>
-            <h1 className="text-4xl font-bold ">{dat.discreption}</h1>
-            <h1 className="text-2xl font-semibold mt-5">
-              {dat.extarDiscreption.header} :{' '}
-            </h1>
-            <p className="font-semibold ">{dat.extarDiscreption.details}</p>
-            <h1 className="text-2xl font-semibold mt-5">
-              {dat.extarDiscreption.header} :{' '}
-            </h1>
-            <p className="font-semibold ">{dat.extarDiscreption.details}</p>
-            <h1 className="text-2xl font-semibold mt-5">
-              {dat.extarDiscreption.header} :{' '}
-            </h1>
-            <p className="font-semibold ">{dat.extarDiscreption.details}</p>
-            <h1 className="text-2xl font-semibold mt-5">
-              {dat.extarDiscreption.header} :{' '}
-            </h1>
-            <p className="font-semibold ">{dat.extarDiscreption.details}</p>
-            <h1 className="text-2xl font-semibold mt-5">
-              {dat.extarDiscreption.header} :{' '}
-            </h1>
-            <p className="font-semibold ">{dat.extarDiscreption.details}</p>
-            <h1 className="text-2xl font-semibold mt-5">
-              {dat.extarDiscreption.header} :{' '}
-            </h1>
-            <p className="font-semibold ">{dat.extarDiscreption.details}</p>
+            <h1 className="text-4xl font-bold">{dat?.discreption}</h1>
+            {dat?.extarDiscreption?.header && (
+              <h1 className="text-2xl font-semibold mt-5">
+                {dat?.extarDiscreption?.header}:
+              </h1>
+            )}
+            {dat?.extarDiscreption?.details && (
+              <p className="font-semibold ">{dat?.extarDiscreption?.details}</p>
+            )}
+          </div>
+          <div>
+            <h1 className="text-4xl font-bold">{dat?.discreption}</h1>
+            {dat?.extarDiscreption?.header && (
+              <h1 className="text-2xl font-semibold mt-5">
+                {dat?.extarDiscreption?.header}:
+              </h1>
+            )}
+            {dat?.extarDiscreption?.details && (
+              <p className="font-semibold ">{dat?.extarDiscreption?.details}</p>
+            )}
           </div>
         </div>
       </div>
