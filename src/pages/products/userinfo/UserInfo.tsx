@@ -22,8 +22,6 @@ const UserInfo = (props: any) => {
   const [updathUserIifo] = useCreateUserInfoMutation();
 
   const onFinish: FormProps<FieldType>['onFinish'] = values => {
-    // console.log('Success:', values);
-
     const userInfo = {
       userID: userId,
       email,

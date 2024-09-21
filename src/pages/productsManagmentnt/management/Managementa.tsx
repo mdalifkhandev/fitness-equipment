@@ -48,7 +48,6 @@ const Managementa = () => {
     {
       title: 'Action',
       key: '_id',
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       render: (_: any, record: any) => {
         return (
           <Space size="small" className="justify-center flex">
@@ -59,8 +58,6 @@ const Managementa = () => {
       },
     },
   ];
-
-  console.log(data.data);
 
   return (
     <div>

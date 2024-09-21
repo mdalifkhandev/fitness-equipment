@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useCreateProductsMutation } from '@/redux/fetures/products/productsApi';
 import { FileAddOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Form, FormProps, Input, InputNumber, Modal, Upload } from 'antd';

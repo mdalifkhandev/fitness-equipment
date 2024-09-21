@@ -51,8 +51,6 @@ const PaymentCatchOn = ({ deleveryProductsInfo }: any) => {
       productsTotalPrice,
       productsID,
     };
-
-    // console.log(orderData);
     try {
       const data = await dataPost(orderData).unwrap();
       toast.success(data?.message);

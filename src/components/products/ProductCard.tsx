@@ -2,7 +2,6 @@ import { Card, Rate } from 'antd';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ProductCard = ({ card }: any) => {
-  // console.log(card?.image.img1);
   const disponutPrice = card.price - (card.price / 100) * card.discount;
 
   return (
