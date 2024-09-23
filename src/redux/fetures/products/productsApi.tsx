@@ -10,7 +10,7 @@ const productsAPI = baseApi.injectEndpoints({
           method: 'GET',
         };
       },
-      // providesTags : ['products'],
+      providesTags : ['products'],
     }),
     getSingleProducts: builders.query({
       query: params => {

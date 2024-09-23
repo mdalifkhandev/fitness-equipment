@@ -148,7 +148,7 @@ const ProductDetails = () => {
           <div className="mb-14">
             <Button
               disabled={dat.instock === 0}
-              href={`/products/checkout/${dat?._id}`}
+              href={`/products/cheakout/${dat?._id}`}
               onClick={hendelProductsInfo}
               className="w-full my-3 btn bg-[#3C0DEF] text-white"
             >

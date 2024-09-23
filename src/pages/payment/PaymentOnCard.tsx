@@ -42,7 +42,6 @@ const PaymentOnCard = ({ deleveryProductsInfo, setId }: any) => {
   };
 
   const handleSubmit = async (event: any) => {
-    setOpen(false);
     event.preventDefault();
     const price = {
       price: productsPrice,
@@ -101,6 +100,7 @@ const PaymentOnCard = ({ deleveryProductsInfo, setId }: any) => {
         const datapost = await dataPost(paymentDetails);
         toast.success(datapost?.data?.message);
         setId(datapost.data.data.paymentID);
+        setOpen(false)
       }
     }
   };
