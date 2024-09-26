@@ -53,18 +53,17 @@ const AddProductsModal = () => {
       console.error('Failed to upload image:', error);
       setLoading(false);
     }
-    return false; // Prevent default upload behavior
+    return false;
   };
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     if (!imageUrl) {
-      // Add a check if no image is uploaded
       return console.error('Please upload an image before submitting.');
     }
 
     const productData = {
       image: {
-        img1: imageUrl, // Use the uploaded image URL
+        img1: imageUrl, 
       },
       name: values.productsName,
       extarDiscreption:{
@@ -81,10 +80,9 @@ const AddProductsModal = () => {
     };
 
     try {
-      // Call the mutation with correct structure
       await createData({ productData });
       console.log('Product submitted successfully:', productData);
-      // setOpen(false); // Close the modal after successful submission
+      setOpen(false);
     } catch (error) {
       console.error('Failed to submit product data:', error);
     }
