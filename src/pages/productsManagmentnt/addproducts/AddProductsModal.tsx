@@ -5,6 +5,7 @@ import { Button, Form, FormProps, Input, InputNumber, Modal, Upload } from 'antd
 import TextArea from 'antd/es/input/TextArea';
 import axios from 'axios';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 const imgbbAPIKey = import.meta.env.VITE_IMGBB_API_KEY;
 const imageUploadUrl = `https://api.imgbb.com/1/upload`;
@@ -80,8 +81,9 @@ const AddProductsModal = () => {
     };
 
     try {
-      await createData({ productData });
-      console.log('Product submitted successfully:', productData);
+      const res=await createData({ productData });
+      console.log(res.data.message);
+      toast.success(res.data.message)
       setOpen(false);
     } catch (error) {
       console.error('Failed to submit product data:', error);
@@ -203,7 +205,7 @@ const AddProductsModal = () => {
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" disabled={loading} htmlType="submit">
               Submit
             </Button>
           </Form.Item>
