@@ -23,7 +23,7 @@ const Home = () => {
         All Products
       </h1>
       <div className="h-[700px] overflow-hidden shadow-2xl   rounded-xl">
-        <div className="grid grid-cols-4 gap-6">
+        <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-6">
           {// eslint-disable-next-line @typescript-eslint/no-explicit-any
           data?.data?.map((card: any) => (
             <ProductCard key={card._id} card={card} />

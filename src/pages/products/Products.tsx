@@ -26,7 +26,7 @@ const Products = () => {
 
   return (
     <div>
-      <div className="flex justify-between">
+      <div className="lg:flex lg:justify-between ">
         <div>
           <SelectsCatagory setValues={setCatagory} />
         </div>
@@ -40,7 +40,7 @@ const Products = () => {
       <h1 className="font-bold text-center text-xl my-4">
         {data?.data?.length} Prodoct
       </h1>
-      <div className="grid grid-cols-4 gap-6">
+      <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-6">
         {// eslint-disable-next-line @typescript-eslint/no-explicit-any
         data?.data?.map((card: any) => (
           <ProductCard key={card._id} card={card} />
