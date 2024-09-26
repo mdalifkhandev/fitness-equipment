@@ -1,15 +1,19 @@
 const Contact = () => {
   return (
     <div>
-        <section className="footer w-full h-full bg-[#327fc7] text-base-content p-10">
+        <section className=" w-full h-full   p-10">
         <nav>
           <h6 className="footer-title">Contact us</h6>
           <a className="link link-hover">District : Thakurgaon</a>
+          <br />
           <a className="link link-hover">Upazila : Thakurgaon</a>
+          <br />
           <a className="link link-hover">
             Address : Thakurgaon Polytechnic institute
           </a>
+          <br />
           <a className="link link-hover">Email : mdalifk2002@gmail.com</a>
+          <br />
           <a className="link link-hover">Phone : 01704347965</a>
         </nav>
         <nav>
@@ -17,15 +21,16 @@ const Contact = () => {
           <a className="link link-hover" href="/about">
             About us
           </a>
-          <a className="link link-hover" href="/contact">
-            Contact
-          </a>
+          <br />
           <a className="link link-hover">Email : mdalifk2002@gmail.com</a>
+          <br />
           <a className="link link-hover">Phone : 01704347965</a>
         </nav>
+        <br />
+        <br />
         <nav>
           <h6 className="footer-title">Social</h6>
-          <div className="grid grid-flow-col gap-4">
+          <div className="flex gap-7">
             <a target="-blank" href="https://x.com/MDAlifK26277528">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
