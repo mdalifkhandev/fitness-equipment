@@ -1,19 +1,20 @@
-import { useGetSingleProductsQuery } from '@/redux/fetures/products/productsApi';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useGetProductsCheakOutQuery } from '@/redux/fetures/products/productsApi';
 import { useCurrentProductsInfo } from '@/redux/fetures/products/productsSlice';
 import { useAppSelector } from '@/redux/hooks';
 import Loding from '@/utils/Loding';
-import { Button, Input } from 'antd';
 import UserInfo from '../products/userinfo/UserInfo';
 import { useCurrentUserInfo } from '@/redux/fetures/users/userSlice';
 import {
   useGetUserInfoQuery,
   useGetUserQuery,
 } from '@/redux/fetures/users/userApi';
+import { RootState } from '@/redux/store';
+import { useState } from 'react';
 import PaymentCatchOn from '../payment/PaymentCatchOn';
 import PaymentOnCard from '../payment/PaymentOnCard';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
-import { useState } from 'react';
 
 const stripepk = import.meta.env.VITE_SECRET_KEY;
 
@@ -27,19 +28,19 @@ type TDeleveryProductInfo = {
   userDistric: string;
   userUpzala: string;
   userAddress: string;
-  productsImage: string;
-  productsName: string;
-  productsPrice: number;
-  productsQuentity: number;
-  productsShipping: number;
-  productsTotalPrice: number;
-  productsID: string;
+  productsID: string[];
+  quentity: unknown;
+  totalPrice: number;
 };
 
 const CheakOut = () => {
-  const { productId, quentity } = useAppSelector(useCurrentProductsInfo);
+  // const { ids, quentity } = useAppSelector(useCurrentProductsInfo);
+  const { ids, quentity } = useAppSelector((state: RootState) =>
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useCurrentProductsInfo(state),
+  ) as { ids: string[]; quentity: { [key: string]: number } };
   const { email } = useAppSelector(useCurrentUserInfo);
-  const { data } = useGetSingleProductsQuery(productId);
+  const { data } = useGetProductsCheakOutQuery(ids);
   const { data: getuserinfo } = useGetUserInfoQuery({ email });
   const { data: getuser } = useGetUserQuery({ email });
   const [id, setId] = useState();
@@ -56,27 +57,43 @@ const CheakOut = () => {
   if (!getuser) {
     return <Loding />;
   }
-  // if (!getuserinfo) {
-  //   return <Loding />;
-  // }
   if (!email) {
     return <Loding />;
   }
 
   const product = data?.data;
 
-  const shipping = Math.ceil(
-    (product?.price / 100) * 2 * (quentity || 1) > 10
-      ? (product?.price / 100) * 2 * (quentity || 1)
-      : 10,
-  );
-  const productPrice = Math.ceil(
-    product?.price - (product?.price / 100) * product?.discount,
-  );
+  // const shipping = Math.ceil(
+  //   (product?.price / 100) * 2 * (quentity || 1) > 10
+  //     ? (product?.price / 100) * 2 * (quentity || 1)
+  //     : 10,
+  // );
+  // const productPrice = Math.ceil(
+  //   product?.price - (product?.price / 100) * product?.discount,
+  // );
+  // const totalPrice = Math.ceil(
+  //   (product?.price - (product?.price / 100) * product?.discount) *
+  //     (quentity || 1),
+  // );
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // const totalPrice=product.reduce((total:number,item:any)=>{
+  //   console.log(item.price);
+
+  //   return total+item.price*quentity[item._id]
+  // })
+
+  // console.log(totalPrice);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const totalPrice = Math.ceil(
-    (product?.price - (product?.price / 100) * product?.discount) *
-      (quentity || 1),
+    product.reduce((total: any, item: any) => {
+      const itemQuantity = quentity[item._id] || 1;
+      const price = item.price - (item.price / 100) * item.discount;
+      return total + price * itemQuantity;
+    }, 0),
   );
+  const shipping = Math.ceil(totalPrice / 200 < 10 ? 10 : totalPrice / 200);
+  const idArray = product.map((item: any) => item.productID);
 
   const deleveryProductsInfo: TDeleveryProductInfo = {
     userName: `${getuser.data.firstName} ${getuser.data.lestName}`,
@@ -86,13 +103,9 @@ const CheakOut = () => {
     userDistric: getuserinfo?.data.distric,
     userUpzala: getuserinfo?.data.upzala,
     userAddress: getuserinfo?.data.detailsAddress,
-    productsImage: product.image.img1,
-    productsName: product.name,
-    productsPrice: productPrice,
-    productsQuentity: quentity || 1,
-    productsShipping: shipping,
-    productsTotalPrice: totalPrice + shipping,
-    productsID: product._id,
+    productsID: idArray,
+    totalPrice: totalPrice + shipping,
+    quentity,
   };
 
   return (
@@ -157,29 +170,54 @@ const CheakOut = () => {
           )}
         </div>
         <div className="shadow-xl col-span-6 p-6  rounded-3xl">
-          <div className="flex justify-between items-center ">
-            <img width="100px" src={product?.image?.img1} alt="" />
-            <p> {product?.name} </p>
-            <p> usd $ {productPrice}</p>
-          </div>
-          <div className="flex gap-5 mt-6">
-            <Input placeholder="Discount Code" />
-            <Button>Submit</Button>
-          </div>
-          <div className="flex gap-5 justify-between mt-6">
-            <p>Subtotal ({quentity} item) </p>
-            <p> $ {totalPrice} </p>
-          </div>
-          <div className="flex gap-5 justify-between mt-6">
-            <p> Shipping </p>
-            <p> $ {shipping} </p>
-          </div>
-          <div className="flex gap-5 justify-between mt-6 text-3xl font-bold">
-            <p> Total </p>
-            <p>
-              <sub className="font-normal text-xl">USD</sub> ${' '}
-              {shipping + totalPrice}
-            </p>
+          {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            product.map((products: any) => (
+              <div className="flex" key={products._id}>
+                <div className="flex justify-between items-center ">
+                  <img width="100px" src={products?.image} alt="" />
+                  <p> {product?.name} </p>
+                  {/* <p> usd $ {productPrice}</p> */}
+                </div>
+                <div className="w-[30%] m-auto">
+                  <h1>{products.name}</h1>
+                </div>
+
+                <div className="  mt-6">
+                  <p>Qit : {quentity[products._id] || 1} </p>
+                  <p>
+                    {' '}
+                    Price : ${' '}
+                    {Math.ceil(
+                      products.price -
+                        (products.price / 100) * products.discount,
+                    )}{' '}
+                  </p>
+                </div>
+
+                <div className="m-auto">
+                  <h1>
+                    Total Price : ${' '}
+                    {Math.ceil(
+                      (products.price -
+                        (products.price / 100) * products.discount) *
+                        (quentity[products._id] || 1),
+                    )}
+                  </h1>
+                </div>
+              </div>
+            ))
+          }
+
+          <div className="m-6 font-bold text-2xl">
+            <div className="flex gap-5 justify-between mt-6">
+              <p> Shipping </p>
+              <p> $ {shipping} </p>
+            </div>
+            <div className="flex gap-5 justify-between mt-6">
+              <p>Total Price </p>
+              <p> $ {totalPrice} </p>
+            </div>
           </div>
           {id ? (
             <p className="mt-16 text-2xl font-bold text-green-800 text-center">

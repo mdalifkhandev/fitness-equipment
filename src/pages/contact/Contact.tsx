@@ -1,7 +1,7 @@
 const Contact = () => {
   return (
     <div>
-        <section className=" w-full h-full   p-10">
+      <section className=" w-full h-full   p-10">
         <nav>
           <h6 className="footer-title">Contact us</h6>
           <a className="link link-hover">District : Thakurgaon</a>

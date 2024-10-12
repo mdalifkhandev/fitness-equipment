@@ -10,17 +10,25 @@ const productsAPI = baseApi.injectEndpoints({
           method: 'GET',
         };
       },
-      providesTags : ['products'],
+      providesTags: ['products'],
     }),
     getSingleProducts: builders.query({
       query: params => {
         return {
           url: `/products/${params}`,
           method: 'GET',
-          params: params,
         };
       },
     }),
+    getProductsCheakOut: builders.query({
+      query: param => {
+        return {
+          url: `/products/cheakout-page?ids=${param}`,
+          method: 'GET',
+        };
+      },
+    }),
+
     getProductsCatagore: builders.query({
       query: () => ({
         url: `/products/catagore`,
@@ -36,21 +44,21 @@ const productsAPI = baseApi.injectEndpoints({
       },
     }),
     updathProducts: builders.mutation({
-      query: ({id,userInfo}) => {
+      query: ({ id, userInfo }) => {
         return {
           url: `/products/updath-products?id=${id}`,
           method: 'PUT',
-          body:userInfo
+          body: userInfo,
         };
       },
     }),
     createProducts: builders.mutation({
-      query: ({productData}) => {
+      query: ({ productData }) => {
         return {
-      url: `/products/create-products`,
-      method: 'POST',
-      body: productData,  
-    };
+          url: `/products/create-products`,
+          method: 'POST',
+          body: productData,
+        };
       },
     }),
     //
@@ -63,5 +71,6 @@ export const {
   useGetProductsCatagoreQuery,
   useDeleteProductsMutation,
   useUpdathProductsMutation,
-  useCreateProductsMutation
+  useCreateProductsMutation,
+  useGetProductsCheakOutQuery,
 } = productsAPI;

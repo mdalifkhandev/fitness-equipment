@@ -29,7 +29,7 @@ const Images = ({ img }: any) => {
 
   return (
     <div>
-      <Image.PreviewGroup items={imageList.map((src) => ({ src }))}>
+      <Image.PreviewGroup items={imageList.map(src => ({ src }))}>
         <Image
           className="overflow-hidden relative block"
           width={500}

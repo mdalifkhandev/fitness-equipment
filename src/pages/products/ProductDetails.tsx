@@ -2,9 +2,10 @@
 import { useCurrentToken } from '@/redux/fetures/auth/authSlice';
 import { useCreateAddToCardMutation } from '@/redux/fetures/mycard/cardProcuct';
 import { useGetSingleProductsQuery } from '@/redux/fetures/products/productsApi';
-import { setProductsCheakout } from '@/redux/fetures/products/productsSlice';
-import { setUserInfo } from '@/redux/fetures/users/userSlice';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+// import { setProductsCheakout } from '@/redux/fetures/products/productsSlice';
+// import { setUserInfo } from '@/redux/fetures/users/userSlice';
+// import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { useAppSelector } from '@/redux/hooks';
 import Images from '@/utils/Image';
 import Loding from '@/utils/Loding';
 import { verifyToken } from '@/utils/verifyToken';
@@ -19,7 +20,7 @@ const ProductDetails = () => {
   const token = useAppSelector(useCurrentToken);
   const [CardData] = useCreateAddToCardMutation();
   const [quentity, setQuentity] = useState(1);
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
   // If no token, prompt user to log in
   if (!token) {
@@ -48,17 +49,17 @@ const ProductDetails = () => {
 
   const image = dat?.image;
 
-  const hendelProductsInfo = () => {
-    const productsInfo = {
-      productId: dat._id,
-      quentity: quentity,
-    };
-    const userInfo = {
-      email: user.email,
-    };
-    dispatch(setProductsCheakout(productsInfo));
-    dispatch(setUserInfo(userInfo));
-  };
+  // const hendelProductsInfo = () => {
+  //   const productsInfo = {
+  //     productId: dat._id,
+  //     quentity: quentity,
+  //   };
+  //   const userInfo = {
+  //     email: user.email,
+  //   };
+  //   dispatch(setProductsCheakout(productsInfo));
+  //   dispatch(setUserInfo(userInfo));
+  // };
 
   const handleAddToCard = async () => {
     const addToCardInfo = {
@@ -66,7 +67,7 @@ const ProductDetails = () => {
       productID: dat?._id,
       email: user.email,
       image: dat?.image?.img1,
-      rating: dat?.rating,
+      rating: dat?.rating ? dat.rating : 0,
       price: dat?.price,
       discreption: dat?.discreption,
       extarDiscreption: {
@@ -145,7 +146,7 @@ const ProductDetails = () => {
               ADD TO CARD
             </Button>
           </div>
-          <div className="mb-14">
+          {/* <div className="mb-14">
             <Button
               disabled={dat.instock === 0}
               href={`/products/cheakout/${dat?._id}`}
@@ -154,7 +155,8 @@ const ProductDetails = () => {
             >
               CHECKOUT
             </Button>
-          </div>
+          </div> */}
+          <br />
           <div>
             <h1 className="text-4xl font-bold">{dat?.discreption}</h1>
             {dat?.extarDiscreption?.header && (

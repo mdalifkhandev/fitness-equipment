@@ -1,7 +1,15 @@
 /* eslint-disable no-console */
 import { useCreateProductsMutation } from '@/redux/fetures/products/productsApi';
 import { FileAddOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Form, FormProps, Input, InputNumber, Modal, Upload } from 'antd';
+import {
+  Button,
+  Form,
+  FormProps,
+  Input,
+  InputNumber,
+  Modal,
+  Upload,
+} from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import axios from 'axios';
 import { useState } from 'react';
@@ -57,40 +65,38 @@ const AddProductsModal = () => {
     return false;
   };
 
-  const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+  const onFinish: FormProps<FieldType>['onFinish'] = async values => {
     if (!imageUrl) {
       return console.error('Please upload an image before submitting.');
     }
 
     const productData = {
       image: {
-        img1: imageUrl, 
+        img1: imageUrl,
       },
       name: values.productsName,
-      extarDiscreption:{
-        header:values.extarDiscreptionHeader
-        ,
-        details:values.extarDiscreptionDetails
-      }
-      ,
+      extarDiscreption: {
+        header: values.extarDiscreptionHeader,
+        details: values.extarDiscreptionDetails,
+      },
       price: values.price,
-  discreption: values.discreption,
-    catagory:values.catagory,
-  instock: values.instock,
-  discount: values.discount
+      discreption: values.discreption,
+      catagory: values.catagory,
+      instock: values.instock,
+      discount: values.discount,
     };
 
     try {
-      const res=await createData({ productData });
+      const res = await createData({ productData });
       console.log(res.data.message);
-      toast.success(res.data.message)
+      toast.success(res.data.message);
       setOpen(false);
     } catch (error) {
       console.error('Failed to submit product data:', error);
     }
   };
 
-  const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
+  const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = errorInfo => {
     console.log('Failed:', errorInfo);
   };
 
@@ -122,7 +128,9 @@ const AddProductsModal = () => {
           <Form.Item<FieldType>
             label="Products Name"
             name="productsName"
-            rules={[{ required: true, message: 'Please input your Products Name!' }]}
+            rules={[
+              { required: true, message: 'Please input your Products Name!' },
+            ]}
           >
             <Input />
           </Form.Item>
@@ -137,7 +145,9 @@ const AddProductsModal = () => {
           <Form.Item<FieldType>
             label="Discreption"
             name="discreption"
-            rules={[{ required: true, message: 'Please input your Discreption!' }]}
+            rules={[
+              { required: true, message: 'Please input your Discreption!' },
+            ]}
           >
             <TextArea />
           </Form.Item>
@@ -145,7 +155,12 @@ const AddProductsModal = () => {
           <Form.Item<FieldType>
             label="Exter Discreption Header"
             name="extarDiscreptionHeader"
-            rules={[{ required: true, message: 'Please input your Extra Discreption Header!' }]}
+            rules={[
+              {
+                required: true,
+                message: 'Please input your Extra Discreption Header!',
+              },
+            ]}
           >
             <Input />
           </Form.Item>
@@ -153,7 +168,12 @@ const AddProductsModal = () => {
           <Form.Item<FieldType>
             label="Extra Discreption Details"
             name="extarDiscreptionDetails"
-            rules={[{ required: true, message: 'Please input your Extra Discreption Details!' }]}
+            rules={[
+              {
+                required: true,
+                message: 'Please input your Extra Discreption Details!',
+              },
+            ]}
           >
             <TextArea />
           </Form.Item>
@@ -194,7 +214,11 @@ const AddProductsModal = () => {
               beforeUpload={handleImageUpload}
             >
               {imageUrl ? (
-                <img src={imageUrl} alt="uploaded image" style={{ width: '100%' }} />
+                <img
+                  src={imageUrl}
+                  alt="uploaded image"
+                  style={{ width: '100%' }}
+                />
               ) : (
                 <div>
                   {loading ? <PlusOutlined spin /> : <PlusOutlined />}

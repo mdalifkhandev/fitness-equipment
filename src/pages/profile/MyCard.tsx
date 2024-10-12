@@ -4,7 +4,9 @@ import {
   useGetAddToCardQuery,
   useRemoveToCardMutation,
 } from '@/redux/fetures/mycard/cardProcuct';
-import { useAppSelector } from '@/redux/hooks';
+import { setProductsCheakout } from '@/redux/fetures/products/productsSlice';
+import { setUserInfo } from '@/redux/fetures/users/userSlice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import DataNotFound from '@/utils/DataNotFound';
 import Loding from '@/utils/Loding';
 import { verifyToken } from '@/utils/verifyToken';
@@ -15,9 +17,7 @@ import { toast } from 'sonner';
 const MyCard = () => {
   const token: any = useAppSelector(useCurrentToken);
   const user: any = verifyToken(token);
-  const email = {
-    email: user.email,
-  };
+  const email = { email: user.email };
   const { data } = useGetAddToCardQuery(email);
   const [remove] = useRemoveToCardMutation();
   const [quentity, setQuentity] = useState<Record<string, number>>({});
@@ -25,6 +25,7 @@ const MyCard = () => {
   const [selectedItems, setSelectedItems] = useState<Record<string, boolean>>(
     {},
   );
+  const dispatch = useAppDispatch();
   const totalItems = Object.keys(selectedItems).reduce((sum, id) => {
     return selectedItems[id] ? sum + (quentity[id] || 1) : sum;
   }, 0);
@@ -81,6 +82,18 @@ const MyCard = () => {
   const shipping: number = Math.floor(
     totalPrice / 100 > 10 ? totalPrice / 100 : 10,
   );
+
+  const hendelCheakOut = () => {
+    const productsInfo = {
+      ids: totalSelectItemId,
+      quentity: quentity,
+    };
+    const userInfo = {
+      email: user.email,
+    };
+    dispatch(setProductsCheakout(productsInfo));
+    dispatch(setUserInfo(userInfo));
+  };
 
   return (
     <div className="grid grid-cols-7 relative">
@@ -214,7 +227,8 @@ const MyCard = () => {
               <p>{totalItems ? shipping + totalPrice : 0}</p>
             </div>
             <Button
-              href={`/products/cheakout/${totalSelectItemId[0]}`}
+              href={`/products/cheakout`}
+              onClick={hendelCheakOut}
               disabled={!totalSelectItemId.length}
               className="w-full mt-5 bg-[#001529] text-white"
             >

@@ -13,7 +13,7 @@ type FieldType = {
 
 const Registration = () => {
   const [createRoot, { data }] = useCreateUserMutation();
-  const onFinish: FormProps<FieldType>['onFinish'] = async(values) => {
+  const onFinish: FormProps<FieldType>['onFinish'] = async values => {
     try {
       const userInfo = {
         firstName: values.firstName,
@@ -21,7 +21,10 @@ const Registration = () => {
         email: values.email,
         password: values.password,
       };
-      const res=await createRoot(userInfo);
+
+      const res = await createRoot(userInfo);
+      // console.log(res.error.data.message);
+      // toast.success(res?.error?.data?.message);
       toast.success(res.data.message);
     } catch (error) {
       toast.error(`Error: ${error}`);

@@ -7,6 +7,8 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { Button, Drawer } from 'antd';
 import { useState } from 'react';
 import { toast } from 'sonner';
+// import { loadStripe } from '@stripe/stripe-js';
+// import { Elements } from '@stripe/react-stripe-js';
 
 const PaymentOnCard = ({ deleveryProductsInfo, setId }: any) => {
   const [dataPost] = useCreateOrderDataMutation();
@@ -20,13 +22,9 @@ const PaymentOnCard = ({ deleveryProductsInfo, setId }: any) => {
     userDistric,
     userUpzala,
     userAddress,
-    productsImage,
-    productsName,
-    productsPrice,
-    productsQuentity,
-    productsShipping,
-    productsTotalPrice,
     productsID,
+    totalPrice,
+    quentity,
   } = deleveryProductsInfo;
 
   const [open, setOpen] = useState(false);
@@ -41,33 +39,110 @@ const PaymentOnCard = ({ deleveryProductsInfo, setId }: any) => {
     setOpen(false);
   };
 
+  //   const handleSubmit = async (event: any) => {
+  //     event.preventDefault();
+  //     // const price = {
+  //     //   price: productsPrice,
+  //     // };
+  //     const claint_secret = await paymentintentprice(totalPrice).unwrap();
+  // console.log(claint_secret);
+
+  //     if (claint_secret) {
+  //       if (!stripe || !element) {
+  //         return;
+  //       }
+  //       const card = element.getElement(CardElement);
+  //       if (card === null) {
+  //         return;
+  //       }
+  //       const { error } = await stripe.createPaymentMethod({
+  //         type: 'card',
+  //         card,
+  //       });
+  //       if (error) {
+  //         toast.error('payment information invalid');
+  //       }
+
+  //       const { paymentIntent, error: confirmError } =
+  //         await stripe.confirmCardPayment(claint_secret.data, {
+  //           payment_method: {
+  //             card: card,
+  //             billing_details: {
+  //               name: userName,
+  //               email: userEmail,
+  //             },
+  //           },
+  //         });
+
+  //       if (confirmError) {
+  //         toast.error('payment information invalid');
+  //       }
+
+  //       if (paymentIntent?.status === 'succeeded') {
+  //         const paymentDetails = {
+  //           userName,
+  //           userEmail,
+  //           userPhone,
+  //           userDivision,
+  //           userDistric,
+  //           userUpzala,
+  //           userAddress,
+  //           totalPrice,
+  //           quentity,
+  //           productsID,
+  //           paymentID: paymentIntent.id,
+  //         };
+  //         const datapost = await dataPost(paymentDetails);
+  //         toast.success(datapost?.data?.message);
+  //         setId(datapost.data.data.paymentID);
+  //         setOpen(false);
+  //       }
+  //     }
+  //   };
+
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    const price = {
-      price: productsPrice,
-    };
-    const claint_secret = await paymentintentprice(price).unwrap();
 
-    if (claint_secret) {
-      if (!stripe || !element) {
+    if (!stripe || !element) {
+      toast.error('Stripe has not loaded yet');
+      return;
+    }
+
+    try {
+      const clientSecretResponse =
+        await paymentintentprice(totalPrice).unwrap();
+      const clientSecret = clientSecretResponse?.data;
+
+      if (!clientSecret) {
+        toast.error('Failed to retrieve client secret');
         return;
       }
+
       const card = element.getElement(CardElement);
-      if (card === null) {
+      if (!card) {
+        toast.error('Card information is missing');
         return;
       }
-      const { error } = await stripe.createPaymentMethod({
+      console.log('lasdkfj');
+
+      const { error: paymentMethodError } = await stripe.createPaymentMethod({
         type: 'card',
         card,
+        billing_details: {
+          name: userName,
+          email: userEmail,
+        },
       });
-      if (error) {
-        toast.error('payment information invalid');
+
+      if (paymentMethodError) {
+        toast.error('Invalid card details');
+        return;
       }
 
       const { paymentIntent, error: confirmError } =
-        await stripe.confirmCardPayment(claint_secret.data, {
+        await stripe.confirmCardPayment(clientSecret, {
           payment_method: {
-            card: card,
+            card,
             billing_details: {
               name: userName,
               email: userEmail,
@@ -76,7 +151,8 @@ const PaymentOnCard = ({ deleveryProductsInfo, setId }: any) => {
         });
 
       if (confirmError) {
-        toast.error('payment information invalid');
+        toast.error('Failed to confirm card payment');
+        return;
       }
 
       if (paymentIntent?.status === 'succeeded') {
@@ -88,20 +164,22 @@ const PaymentOnCard = ({ deleveryProductsInfo, setId }: any) => {
           userDistric,
           userUpzala,
           userAddress,
-          productsImage,
-          productsName,
-          productsPrice,
-          productsQuentity,
-          productsShipping,
-          productsTotalPrice,
+          totalPrice,
+          quentity,
           productsID,
           paymentID: paymentIntent.id,
         };
+
         const datapost = await dataPost(paymentDetails);
         toast.success(datapost?.data?.message);
         setId(datapost.data.data.paymentID);
-        setOpen(false)
+        setOpen(false);
+      } else {
+        toast.error('Payment failed');
       }
+    } catch (err) {
+      console.error('Payment intent error', err);
+      toast.error('Failed to process payment');
     }
   };
 
@@ -148,22 +226,11 @@ const PaymentOnCard = ({ deleveryProductsInfo, setId }: any) => {
               <p> {userAddress} </p>
             </div>
           </div>
-          <div>
-            <p>Products </p>
-            <div>
-              <img width="150px" src={productsImage} alt="" />
-              <p> {productsName} </p>
-              <p> Price : {productsPrice} </p>
-              <p>Qit: {productsQuentity} </p>
-
-              <p>Total Price : {productsTotalPrice + productsShipping} </p>
-            </div>
-          </div>
 
           <form onSubmit={handleSubmit} className="w-72 ">
             <CardElement />
             <button type="submit" className="btn mt-5" disabled={!stripe}>
-              Pay ${productsPrice}
+              Pay ${totalPrice}
             </button>
           </form>
         </div>

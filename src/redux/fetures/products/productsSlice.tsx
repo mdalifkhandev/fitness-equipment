@@ -1,14 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { RootState } from '@/redux/store';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  productsName: null,
-  productId: null,
-  price: null,
-  quentity: null,
-  images: null,
-  catagory: null,
-  discount: null,
+  ids: [],
+  quentity: {},
 };
 
 const productsSlice = createSlice({
@@ -16,9 +12,8 @@ const productsSlice = createSlice({
   initialState,
   reducers: {
     setProductsCheakout: (state, action) => {
-      const { productId, quentity } = action.payload;
-      state.productId = productId;
-      state.quentity = quentity;
+      const { ids, quentity } = action.payload;
+      (state.ids = ids), (state.quentity = quentity);
     },
   },
 });

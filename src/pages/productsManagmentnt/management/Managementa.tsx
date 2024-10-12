@@ -28,7 +28,6 @@ const Managementa = () => {
     key: product._id || index,
   }));
 
-
   const columns = [
     {
       title: 'Name',
@@ -61,9 +60,8 @@ const Managementa = () => {
 
   return (
     <div>
-      <Card title='Products List ' extra={<AddProductsModal/>}> 
-
-      <Table dataSource={dataSource} columns={columns} />
+      <Card title="Products List " extra={<AddProductsModal />}>
+        <Table dataSource={dataSource} columns={columns} />
       </Card>
     </div>
   );

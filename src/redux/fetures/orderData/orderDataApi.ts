@@ -16,7 +16,7 @@ const orderDataApi = baseApi.injectEndpoints({
         return {
           url: '/order/payment-intent',
           method: 'POST',
-          body: price,
+          body: { price },
         };
       },
     }),
@@ -28,6 +28,15 @@ const orderDataApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getAllOrderData: builder.query({
+      query: ({ ids }) => {
+        return {
+          url: `/order/get-all-order?ids=${ids}`,
+          method: 'GET',
+        };
+      },
+    }),
+
     getCancelOrderData: builder.query({
       query: ({ email }) => {
         return {
@@ -53,4 +62,5 @@ export const {
   useGetOrderDataQuery,
   useDeletedOrderDataMutation,
   useGetCancelOrderDataQuery,
+  useGetAllOrderDataQuery,
 } = orderDataApi;

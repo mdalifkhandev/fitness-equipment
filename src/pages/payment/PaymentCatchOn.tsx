@@ -15,13 +15,9 @@ const PaymentCatchOn = ({ deleveryProductsInfo }: any) => {
     userDistric,
     userUpzala,
     userAddress,
-    productsImage,
-    productsName,
-    productsPrice,
-    productsQuentity,
-    productsShipping,
-    productsTotalPrice,
     productsID,
+    quentity,
+    totalPrice,
   } = deleveryProductsInfo;
 
   const [open, setOpen] = useState(false);
@@ -43,13 +39,9 @@ const PaymentCatchOn = ({ deleveryProductsInfo }: any) => {
       userDistric,
       userUpzala,
       userAddress,
-      productsImage,
-      productsName,
-      productsPrice,
-      productsQuentity,
-      productsShipping,
-      productsTotalPrice,
       productsID,
+      quentity,
+      totalPrice,
     };
     try {
       const data = await dataPost(orderData).unwrap();
@@ -101,22 +93,25 @@ const PaymentCatchOn = ({ deleveryProductsInfo }: any) => {
               <p> {userAddress} </p>
             </div>
           </div>
-          <div>
-            <p>Products </p>
-            <div>
+          {/* <div> */}
+          {/* <p>Products </p> */}
+          {/* <div>
               <img width="150px" src={productsImage} alt="" />
               <p> {productsName} </p>
               <p> Price : {productsPrice} </p>
               <p>Qit: {productsQuentity} </p>
 
               <p>Total Price : {productsTotalPrice + productsShipping} </p>
-            </div>
-          </div>
+            </div> */}
+          {/* </div> */}
           <Button
             onClick={hendleProcessOrder}
-            className="bg-[#001529] text-white"
+            className="bg-[#001529] h-14 text-white"
           >
-            <p onClick={onClose}>Process Order</p>
+            <p onClick={onClose}>
+              Process Order
+              <br />$ {totalPrice}
+            </p>
           </Button>
         </div>
       </Drawer>
