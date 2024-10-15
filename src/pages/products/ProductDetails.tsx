@@ -83,11 +83,8 @@ const ProductDetails = () => {
     try {
       const res = await CardData(addToCardInfo).unwrap();
       toast.success(res?.message);
-      console.log(res);
-      
     } catch (error: any) {
       toast.error(error.data.message);
-      console.log(error);
       
     }
   };
