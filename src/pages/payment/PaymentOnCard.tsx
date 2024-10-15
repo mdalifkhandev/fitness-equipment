@@ -123,7 +123,6 @@ const PaymentOnCard = ({ deleveryProductsInfo, setId }: any) => {
         toast.error('Card information is missing');
         return;
       }
-      console.log('lasdkfj');
 
       const { error: paymentMethodError } = await stripe.createPaymentMethod({
         type: 'card',

@@ -88,7 +88,6 @@ const AddProductsModal = () => {
 
     try {
       const res = await createData({ productData });
-      console.log(res.data.message);
       toast.success(res.data.message);
       setOpen(false);
     } catch (error) {

@@ -52,8 +52,6 @@ const UpdateProductModal = ({ data }: any) => {
 
     const id = data._id as string;
     const res = await updath({ id, userInfo }).unwrap();
-    console.log(res.message);
-
     toast.success(res.message);
 
     setOpen(false);

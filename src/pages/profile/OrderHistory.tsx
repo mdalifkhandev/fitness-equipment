@@ -47,8 +47,6 @@ const OrderHistory = () => {
     console.error('Error fetching all order data:', getAllOrderError);
   }
 
-  console.log(getallorderdata, ids, cancelOrderData);
-
   return (
     <div>
       <Card title="Your Order History">
