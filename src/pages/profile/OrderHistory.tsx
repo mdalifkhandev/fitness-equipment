@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCurrentToken } from '@/redux/fetures/auth/authSlice';
 import {

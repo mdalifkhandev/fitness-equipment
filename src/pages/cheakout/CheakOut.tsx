@@ -76,7 +76,7 @@ const CheakOut = () => {
   //     (quentity || 1),
   // );
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+ 
   // const totalPrice=product.reduce((total:number,item:any)=>{
   //   console.log(item.price);
 
@@ -84,7 +84,7 @@ const CheakOut = () => {
   // })
 
   // console.log(totalPrice);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   const totalPrice = Math.ceil(
     product.reduce((total: any, item: any) => {
       const itemQuantity = quentity[item._id] || 1;
@@ -171,7 +171,7 @@ const CheakOut = () => {
         </div>
         <div className="shadow-xl col-span-6 p-6  rounded-3xl">
           {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
             product.map((products: any) => (
               <div className="flex" key={products._id}>
                 <div className="flex justify-between items-center ">
