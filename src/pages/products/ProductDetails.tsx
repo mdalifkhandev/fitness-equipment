@@ -85,6 +85,7 @@ const ProductDetails = () => {
       toast.success(res?.message);
     } catch (error: any) {
       toast.error(error.data.message);
+      console.log(error);
       
     }
   };
