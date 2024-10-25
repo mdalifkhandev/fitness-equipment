@@ -1,37 +1,43 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useCreateUserInfoMutation } from '@/redux/fetures/users/userApi';
+
+// import { useCreateUserInfoMutation } from '@/redux/fetures/users/userApi';
 import { Button, Form, FormProps, Input, Modal } from 'antd';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-type FieldType = {
+export type FieldUserType = {
   phonNumber?: string;
   division?: string;
   distric?: string;
   upzelea?: string;
   address?: string;
+  email?:string
+  name:string
 };
 
-const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = errorInfo => {
+const onFinishFailed: FormProps<FieldUserType>['onFinishFailed'] = errorInfo => {
   // eslint-disable-next-line no-console
   console.log('Failed:', errorInfo);
 };
 
-const UserInfo = (props: any) => {
-  const { userId, email } = props.modalData;
-  const [updathUserIifo] = useCreateUserInfoMutation();
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const UserInfo = ({setUserInfo}:any) => {
+  // const { userId, email } = props.modalData;
+  // const [updathUserIifo] = useCreateUserInfoMutation();
 
-  const onFinish: FormProps<FieldType>['onFinish'] = values => {
+  const onFinish: FormProps<FieldUserType>['onFinish'] = values => {
     const userInfo = {
-      userID: userId,
-      email,
-      phone: values.phonNumber,
+      email:values.email,
+      name:values.name,
+      phonNumber: values.phonNumber,
       division: values.division,
       distric: values.distric,
-      upzala: values.upzelea,
-      detailsAddress: values.address,
+      upzelea: values.upzelea,
+      address: values.address,
     };
-    updathUserIifo(userInfo).unwrap();
+    // updathUserIifo(userInfo).unwrap();
+    console.log(userInfo);
+    setUserInfo(userInfo)
     toast.success('user info created successfully');
   };
 
@@ -74,7 +80,16 @@ const UserInfo = (props: any) => {
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
-            <Form.Item<FieldType>
+            <Form.Item<FieldUserType>
+              label="Name"
+              name="name"
+              rules={[
+                { required: true, message: 'Please input your Name!' },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item<FieldUserType>
               label="Phone Number"
               name="phonNumber"
               rules={[
@@ -83,8 +98,18 @@ const UserInfo = (props: any) => {
             >
               <Input />
             </Form.Item>
+            <Form.Item<FieldUserType>
+              label="Email"
+              name="email"
+              rules={[
+                { required: true, message: 'Please input your Email!' },
+              ]}
+            >
+              <Input />
+            </Form.Item>
 
-            <Form.Item<FieldType>
+
+            <Form.Item<FieldUserType>
               label="Division"
               name="division"
               rules={[
@@ -93,7 +118,7 @@ const UserInfo = (props: any) => {
             >
               <Input />
             </Form.Item>
-            <Form.Item<FieldType>
+            <Form.Item<FieldUserType>
               label="Distric"
               name="distric"
               rules={[
@@ -102,14 +127,14 @@ const UserInfo = (props: any) => {
             >
               <Input />
             </Form.Item>
-            <Form.Item<FieldType>
+            <Form.Item<FieldUserType>
               label="Upzela"
               name="upzelea"
               rules={[{ required: true, message: 'Please input your Upzela!' }]}
             >
               <Input />
             </Form.Item>
-            <Form.Item<FieldType>
+            <Form.Item<FieldUserType>
               label="Address"
               name="address"
               rules={[

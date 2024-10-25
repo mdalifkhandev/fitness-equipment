@@ -3,63 +3,56 @@ import { useGetProductsCheakOutQuery } from '@/redux/fetures/products/productsAp
 import { useCurrentProductsInfo } from '@/redux/fetures/products/productsSlice';
 import { useAppSelector } from '@/redux/hooks';
 import Loding from '@/utils/Loding';
-import UserInfo from '../products/userinfo/UserInfo';
-import { useCurrentUserInfo } from '@/redux/fetures/users/userSlice';
-import {
-  useGetUserInfoQuery,
-  useGetUserQuery,
-} from '@/redux/fetures/users/userApi';
 import { RootState } from '@/redux/store';
 import { useState } from 'react';
 import PaymentCatchOn from '../payment/PaymentCatchOn';
 import PaymentOnCard from '../payment/PaymentOnCard';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
+import UserInfo, { FieldUserType } from '../products/userinfo/UserInfo';
 
 const stripepk = import.meta.env.VITE_SECRET_KEY;
 
 const stripePromis: Promise<Stripe | null> = loadStripe(stripepk);
 
 type TDeleveryProductInfo = {
-  userName: string;
-  userEmail: string;
-  userPhone: number;
-  userDivision: string;
-  userDistric: string;
-  userUpzala: string;
-  userAddress: string;
+  userName: string | undefined;
+  userEmail: string | undefined;
+  userPhone: string|number | undefined ;
+  userDivision: string | undefined;
+  userDistric: string | undefined;
+  userUpzala: string | undefined;
+  userAddress: string | undefined;
   productsID: string[];
   quentity: unknown;
   totalPrice: number;
 };
 
 const CheakOut = () => {
+  const [userinfo,setUserInfo]=useState<FieldUserType|undefined>(undefined)
   // const { ids, quentity } = useAppSelector(useCurrentProductsInfo);
   const { ids, quentity } = useAppSelector((state: RootState) =>
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useCurrentProductsInfo(state),
   ) as { ids: string[]; quentity: { [key: string]: number } };
-  const { email } = useAppSelector(useCurrentUserInfo);
+  // const { email } = useAppSelector(useCurrentUserInfo);
   const { data } = useGetProductsCheakOutQuery(ids);
-  const { data: getuserinfo } = useGetUserInfoQuery({ email });
-  const { data: getuser } = useGetUserQuery({ email });
+  // const { data: getuserinfo } = useGetUserInfoQuery(undefined);
+  // const { data: getuser } = useGetUserQuery(undefined);
   const [id, setId] = useState();
 
-  const userId = getuser?.data?._id;
-  const modelData = {
-    userId,
-    email,
-  };
+  // const userId = getuser?.data?._id;
+  // const modelData = {
+  //   userId
+  // };
+
+  console.log(userinfo);
+  
 
   if (!data) {
     return <Loding />;
   }
-  if (!getuser) {
-    return <Loding />;
-  }
-  if (!email) {
-    return <Loding />;
-  }
+  
 
   const product = data?.data;
 
@@ -96,13 +89,13 @@ const CheakOut = () => {
   const idArray = product.map((item: any) => item.productID);
 
   const deleveryProductsInfo: TDeleveryProductInfo = {
-    userName: `${getuser.data.firstName} ${getuser.data.lestName}`,
-    userEmail: email,
-    userPhone: getuserinfo?.data.phone,
-    userDivision: getuserinfo?.data.division,
-    userDistric: getuserinfo?.data.distric,
-    userUpzala: getuserinfo?.data.upzala,
-    userAddress: getuserinfo?.data.detailsAddress,
+    userName: userinfo?.name,
+    userEmail: userinfo?.email,
+    userPhone: userinfo?.phonNumber,
+    userDivision: userinfo?.division,
+    userDistric: userinfo?.distric,
+    userUpzala: userinfo?.upzelea,
+    userAddress: userinfo?.address,
     productsID: idArray,
     totalPrice: totalPrice + shipping,
     quentity,
@@ -110,9 +103,9 @@ const CheakOut = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-12 gap-4 ">
+      <div className="grid lg:grid-cols-12 gap-4 ">
         <div className="shadow-xl col-span-6 rounded-2xl">
-          {getuserinfo ? (
+          {userinfo ? (
             <>
               <div className="shadow-2xl m-5 p-5 rounded-2xl">
                 <p className="text-3xl font-bold text-center mb-5">
@@ -123,36 +116,43 @@ const CheakOut = () => {
                 <p className="flex justify-between mt-3 font-bold">
                   <span>Your Name : </span>
                   <span>
-                    {getuser.data.firstName} {getuser.data.lestName}
+                    {/* {getuser.data.firstName} {getuser.data.lestName} */}
+                    {userinfo?.name}
                   </span>
                 </p>
                 <p className="flex justify-between mt-3 font-bold">
                   <span>Your Email : </span>
-                  <span>{email}</span>
+                  <span>
+                    {userinfo.email}
+                  </span>
                 </p>
+                {/* <p className="flex justify-between mt-3 font-bold">
+                  <span>Your Email : </span>
+                  <span>{email}</span>
+                </p> */}
                 <p className="flex justify-between mt-3 font-bold">
                   <span>Your Phon Number : </span>
-                  <span>{getuserinfo?.data.phone} </span>
+                  {userinfo.phonNumber}
                 </p>
                 <p className="flex justify-between mt-3 font-bold">
                   <span>Your dividion : </span>
-                  <span>{getuserinfo?.data.division} </span>
+                  {userinfo.division}
                 </p>
                 <p className="flex justify-between mt-3 font-bold">
                   <span>Your distric : </span>
-                  <span>{getuserinfo?.data.distric} </span>
+                  {userinfo.distric}
                 </p>
                 <p className="flex justify-between mt-3 font-bold">
                   <span>Your upzela : </span>
-                  <span>{getuserinfo?.data.upzala} </span>
+                  {userinfo.upzelea}
                 </p>
                 <p className="flex justify-between mt-3 font-bold">
                   <span>Your address : </span>
-                  <span>{getuserinfo?.data.detailsAddress} </span>
+                  {userinfo.address}
                 </p>
               </div>
 
-              <div className="m-5 p-5 shadow-2xl flex justify-between gap-5">
+              <div className="m-5 p-5 shadow-2xl lg:flex justify-between gap-5 md:block ">
                 <PaymentCatchOn deleveryProductsInfo={deleveryProductsInfo} />
                 <Elements stripe={stripePromis}>
                   <PaymentOnCard
@@ -165,7 +165,10 @@ const CheakOut = () => {
           ) : (
             <>
               <p>Please give Your addres</p>
-              <UserInfo modalData={modelData} />
+              <UserInfo 
+              setUserInfo={setUserInfo}
+              // modalData={modelData} 
+              />
             </>
           )}
         </div>

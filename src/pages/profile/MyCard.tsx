@@ -1,24 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useCurrentToken } from '@/redux/fetures/auth/authSlice';
+// import { useCurrentToken } from '@/redux/fetures/auth/authSlice';
 import {
   useGetAddToCardQuery,
   useRemoveToCardMutation,
 } from '@/redux/fetures/mycard/cardProcuct';
 import { setProductsCheakout } from '@/redux/fetures/products/productsSlice';
-import { setUserInfo } from '@/redux/fetures/users/userSlice';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+// import { setUserInfo } from '@/redux/fetures/users/userSlice';
+import { useAppDispatch, } from '@/redux/hooks';
 import DataNotFound from '@/utils/DataNotFound';
 import Loding from '@/utils/Loding';
-import { verifyToken } from '@/utils/verifyToken';
+// import { verifyToken } from '@/utils/verifyToken';
 import { Button, Card, Checkbox } from 'antd';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
 const MyCard = () => {
-  const token: any = useAppSelector(useCurrentToken);
-  const user: any = verifyToken(token);
-  const email = { email: user.email };
-  const { data } = useGetAddToCardQuery(email);
+  // const token: any = useAppSelector(useCurrentToken);
+  // const user: any = verifyToken(token);
+  // const email = { email: user.email };
+  const { data } = useGetAddToCardQuery(undefined);
   const [remove] = useRemoveToCardMutation();
   const [quentity, setQuentity] = useState<Record<string, number>>({});
   const [clicked, setClicked] = useState<Record<string, boolean>>({});
@@ -88,11 +88,11 @@ const MyCard = () => {
       ids: totalSelectItemId,
       quentity: quentity,
     };
-    const userInfo = {
-      email: user.email,
-    };
+    // const userInfo = {
+    //   email: user.email,
+    // };
     dispatch(setProductsCheakout(productsInfo));
-    dispatch(setUserInfo(userInfo));
+    // dispatch(setUserInfo(userInfo));
   };
 
   return (

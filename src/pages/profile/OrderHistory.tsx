@@ -39,6 +39,7 @@ const OrderHistory = () => {
   // const handleOrderCancel = (id: any) => {
   //   deleted(id);
   // };
+console.log(ids);
 
   if (!data) {
     return <Loding />;
@@ -75,7 +76,7 @@ const OrderHistory = () => {
                   Cancel Order
                 </Button> */}
                 <div>
-                  {card.paymentID ? (
+                  {/* {card.paymentID ? (
                     <p className="border rounded-lg bg-green-500 text-white mt-3 text-center">
                       Paid
                     </p>
@@ -83,7 +84,7 @@ const OrderHistory = () => {
                     <p className="border rounded-lg bg-red-500 text-white mt-3 px-5 p-2 text-center">
                       <a href={`/products/${card._id}`}>Unpaid</a>
                     </p>
-                  )}
+                  )} */}
                 </div>
               </div>
             </div>

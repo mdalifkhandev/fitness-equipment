@@ -1,4 +1,3 @@
-import ProtactRoute from '@/components/layout/protctedRoute/ProtactRoute';
 import AccountDetails from '@/pages/profile/AccountDetails';
 import MyCard from '@/pages/profile/MyCard';
 import OrderHistory from '@/pages/profile/OrderHistory';
@@ -8,9 +7,9 @@ export const profilePath = [
     name: 'Account Details',
     path: 'account-details',
     element: (
-      <ProtactRoute>
+      // <ProtactRoute>
         <AccountDetails />
-      </ProtactRoute>
+      // </ProtactRoute>
     ),
   },
 
@@ -18,18 +17,18 @@ export const profilePath = [
     name: 'Order History',
     path: 'order-history',
     element: (
-      <ProtactRoute>
+      // <ProtactRoute>
         <OrderHistory />
-      </ProtactRoute>
+      // </ProtactRoute>
     ),
   },
   {
     name: 'MY Card',
     path: 'my-card',
     element: (
-      <ProtactRoute>
+      // <ProtactRoute>
         <MyCard />
-      </ProtactRoute>
+      // </ProtactRoute>
     ),
   },
 ];

@@ -1,45 +1,45 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useCurrentToken } from '@/redux/fetures/auth/authSlice';
+// import { useCurrentToken } from '@/redux/fetures/auth/authSlice';
 import { useCreateAddToCardMutation } from '@/redux/fetures/mycard/cardProcuct';
 import { useGetSingleProductsQuery } from '@/redux/fetures/products/productsApi';
 // import { setProductsCheakout } from '@/redux/fetures/products/productsSlice';
 // import { setUserInfo } from '@/redux/fetures/users/userSlice';
 // import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { useAppSelector } from '@/redux/hooks';
+// import { useAppSelector } from '@/redux/hooks';
 import Images from '@/utils/Image';
 import Loding from '@/utils/Loding';
-import { verifyToken } from '@/utils/verifyToken';
+// import { verifyToken } from '@/utils/verifyToken';
 import { Button, Rate } from 'antd';
 import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 
 const ProductDetails = () => {
   const { id } = useParams();
   const { data } = useGetSingleProductsQuery(id);
-  const token = useAppSelector(useCurrentToken);
+  // const token = useAppSelector(useCurrentToken);
   const [CardData] = useCreateAddToCardMutation();
   const [quentity, setQuentity] = useState(1);
   // const dispatch = useAppDispatch();
 
   // If no token, prompt user to log in
-  if (!token) {
-    return (
-      <div>
-        <Loding />
-        <Link className="text-3xl flex justify-center" to={`/login`}>
-          Please Login to Click
-        </Link>
-      </div>
-    );
-  }
+  // if (!token) {
+  //   return (
+  //     <div>
+  //       <Loding />
+  //       <Link className="text-3xl flex justify-center" to={`/login`}>
+  //         Please Login to Click
+  //       </Link>
+  //     </div>
+  //   );
+  // }
 
   // If no data, show loading
   if (!data) {
     return <Loding />;
   }
 
-  const user: any = verifyToken(token);
+  // const user: any = verifyToken(token);
   const dat = data?.data;
 
   // Ensure dat exists and is not null
@@ -65,7 +65,7 @@ const ProductDetails = () => {
     const addToCardInfo = {
       name: dat?.name,
       productID: dat?._id,
-      email: user.email,
+      // email: user.email,
       image: dat?.image?.img1,
       rating: dat?.rating ? dat.rating : 0,
       price: dat?.price,

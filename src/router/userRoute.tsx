@@ -1,9 +1,9 @@
-import ProtactRoute from '@/components/layout/protctedRoute/ProtactRoute';
 import About from '@/pages/about/About';
 import Contact from '@/pages/contact/Contact';
 import Home from '@/pages/home/Home';
 import Products from '@/pages/products/Products';
 import Managementa from '@/pages/productsManagmentnt/management/Managementa';
+import MyCard from '@/pages/profile/MyCard';
 
 export const userPath = [
   {
@@ -23,21 +23,23 @@ export const userPath = [
     element: <Managementa />,
   },
   {
+    name: 'My Card',
+    path: 'my-card',
+    element: <MyCard />
+      
+  },
+  {
     name: 'About',
     path: 'About',
-    element: (
-      <ProtactRoute>
+    element: 
         <About />
-      </ProtactRoute>
-    ),
+   
   },
   {
     name: 'Contact',
     path: 'contact',
-    element: (
-      <ProtactRoute>
-        <Contact />
-      </ProtactRoute>
-    ),
+    element: <Contact />
+      
   },
+  
 ];
