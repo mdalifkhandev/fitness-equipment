@@ -20,7 +20,6 @@ const onFinishFailed: FormProps<FieldUserType>['onFinishFailed'] = errorInfo => 
   console.log('Failed:', errorInfo);
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const UserInfo = ({setUserInfo}:any) => {
   // const { userId, email } = props.modalData;
   // const [updathUserIifo] = useCreateUserInfoMutation();
@@ -36,7 +35,7 @@ const UserInfo = ({setUserInfo}:any) => {
       address: values.address,
     };
     // updathUserIifo(userInfo).unwrap();
-    console.log(userInfo);
+    // console.log(userInfo);
     setUserInfo(userInfo)
     toast.success('user info created successfully');
   };

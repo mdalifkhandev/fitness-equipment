@@ -115,13 +115,13 @@ const PaymentOnCard = ({ deleveryProductsInfo, setId }: any) => {
       const clientSecret = clientSecretResponse?.data;
 
       if (!clientSecret) {
-        toast.error('Failed to retrieve client secret');
+        toast.error('Failed to retrieve client secret , Please give me valid email');
         return;
       }
 
       const card = element.getElement(CardElement);
       if (!card) {
-        toast.error('Card information is missing');
+        toast.error('Card information is missing, Please give me valid email');
         return;
       }
 
@@ -133,9 +133,8 @@ const PaymentOnCard = ({ deleveryProductsInfo, setId }: any) => {
           email: userEmail,
         },
       });
-
       if (paymentMethodError) {
-        toast.error('Invalid card details');
+        toast.error('Invalid card details , Please give me valid email');
         return;
       }
 
@@ -151,7 +150,7 @@ const PaymentOnCard = ({ deleveryProductsInfo, setId }: any) => {
         });
 
       if (confirmError) {
-        toast.error('Failed to confirm card payment');
+        toast.error('Failed to confirm card payment , Please give me valid email');
         return;
       }
 

@@ -46,7 +46,7 @@ const CheakOut = () => {
   //   userId
   // };
 
-  console.log(userinfo);
+  // console.log(userinfo);
   
 
   if (!data) {
