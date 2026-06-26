@@ -1,6 +1,5 @@
 import Carousel from '@/components/headers/carousel/Carousels';
 import { useEffect } from 'react';
-import { Button } from 'antd';
 import Section from '@/components/homeSection/Section';
 import BenefitSection from '@/components/homeSection/BenefitSection';
 import ProductCard from '@/components/products/ProductCard';
@@ -18,25 +17,29 @@ const Home = () => {
       <div className="">
         <Carousel />
       </div>
-      <h1 className="text-center text-5xl font-bold my-10 text-green-400">
-        {' '}
-        All Products
-      </h1>
-      <div className="h-[700px] overflow-hidden shadow-2xl   rounded-xl">
-        <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-6">
+      <div className="text-center mt-16 mb-10">
+        <span className="text-sm font-extrabold tracking-widest text-blue-600 uppercase border-b-2 border-blue-500 pb-1">
+          Featured Gear
+        </span>
+        <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 mt-3 uppercase">
+          Top Rated Equipment
+        </h2>
+      </div>
+      <div className="container mx-auto px-4 mb-12">
+        <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-8">
           {// eslint-disable-next-line @typescript-eslint/no-explicit-any
-          data?.data?.map((card: any) => (
+          data?.data?.slice(0, 8).map((card: any) => (
             <ProductCard key={card._id} card={card} />
           ))}
         </div>
       </div>
-      <div className="flex justify-center">
-        <Button
+      <div className="flex justify-center mb-16">
+        <a
           href="/products"
-          className="-mt-8 btn-outlinen bg-[#001529] text-white"
+          className="inline-flex items-center justify-center bg-gray-950 text-white font-bold py-3 px-10 rounded-xl hover:bg-gray-800 transition duration-300 transform hover:scale-105 shadow-md"
         >
-          See more
-        </Button>
+          See All Products
+        </a>
       </div>
       <Section />
       <BenefitSection />
