@@ -1,8 +1,9 @@
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { Button, Dropdown, MenuProps, Space } from 'antd';
+import { Button, Dropdown, MenuProps } from 'antd';
 import { logout, useCurrentToken } from '@/redux/fetures/auth/authSlice';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
+import { UserCircle } from 'lucide-react';
 
 const Profile = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +21,7 @@ const Profile = () => {
     {
       key: 'Account Details',
       label: token ? (
-        <Link to={'/account-details'} className="">
+        <Link to={'/account-details'} className="font-medium text-slate-700">
           Account Details
         </Link>
       ) : null,
@@ -28,7 +29,7 @@ const Profile = () => {
     {
       key: 'Order History',
       label: token ? (
-        <Link to={'/order-history'} className="">
+        <Link to={'/order-history'} className="font-medium text-slate-700">
           Order History
         </Link>
       ) : null,
@@ -36,18 +37,21 @@ const Profile = () => {
     {
       key: 'My Cart',
       label: token ? (
-        <Link to={'/my-cart'} className="">
+        <Link to={'/my-cart'} className="font-medium text-slate-700">
           My Cart
         </Link>
       ) : null,
     },
     {
+      type: 'divider',
+    },
+    {
       key: 'logout',
       danger: true,
       label: token ? (
-        <Button onClick={logoutUser} className=" bg-red-600">
+        <div onClick={logoutUser} className="font-bold text-red-600 w-full">
           Log Out
-        </Button>
+        </div>
       ) : (
         <Link to={'/login'}>Login</Link>
       ),
@@ -55,31 +59,19 @@ const Profile = () => {
   ];
 
   return (
-    <div>
-      <Dropdown menu={{ items }}>
-        <a onClick={e => e.preventDefault()}>
-          <Space className=" flex justify-center items-center text-white">
-            <title>Profile</title>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="size-10"
-            >
-              <path
-                // stroke-linecap="round"
-                strokeLinecap="round"
-                //  stroke-linejoin="round"
-                strokeLinejoin="round"
-                d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-              />
-            </svg>
-          </Space>
-        </a>
-      </Dropdown>
-    </div>
+    <Dropdown 
+      menu={{ items }} 
+      placement="bottomRight"
+      trigger={['click']}
+      overlayClassName="w-48"
+    >
+      <button 
+        type="button" 
+        className="flex items-center justify-center p-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 transition-all focus:outline-none"
+      >
+        <UserCircle className="h-7 w-7" />
+      </button>
+    </Dropdown>
   );
 };
 
