@@ -1,83 +1,163 @@
-import { userPath } from '@/router/userRoute';
-import { menubaeItemGenerator } from '@/utils/menubarItemsGenerator';
-import { Layout, Menu, theme } from 'antd';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import Profile from '@/pages/profile/Profile';
 import { useAppSelector } from '@/redux/hooks';
 import { useCurrentToken } from '@/redux/fetures/auth/authSlice';
+import { ShoppingCart, User, Menu as MenuIcon, X, Dumbbell } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
-const { Header, Content } = Layout;
-
-const items = menubaeItemGenerator(userPath);
+const navLinks = [
+  { name: 'Home', path: '/' },
+  { name: 'All Shops', path: '/products' },
+  { name: 'Dashboard', path: '/productsmanagement' },
+  { name: 'About', path: '/about' },
+  { name: 'Contact', path: '/contact' },
+];
 
 const MainLayout = () => {
   const token = useAppSelector(useCurrentToken);
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   return (
-    <div>
-      <Layout>
-        <Header
-          style={{
-            position: 'sticky',
-            top: 0,
-            zIndex: 1,
-            width: '100%',
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-          {/* <div className="demo-logo" /> */}
-          <Link to="/">
-            <div className="text-[#001529] font-extrabold text-5xl px-3 mr-10 bg-white rounded-lg p-1">
-              FIT-EQ
+    <div className="min-h-screen flex flex-col font-sans text-slate-900 bg-white">
+      <header
+        className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+          isScrolled
+            ? 'bg-slate-950/95 backdrop-blur-md shadow-md border-b border-slate-800'
+            : 'bg-slate-950 border-b border-slate-900'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-20">
+            {/* Logo */}
+            <div className="flex-shrink-0 flex items-center">
+              <Link to="/" className="flex items-center gap-2 group">
+                <div className="bg-brand-primary text-white p-2 rounded-xl group-hover:scale-105 transition-transform">
+                  <Dumbbell className="h-6 w-6" />
+                </div>
+                <span className="font-black text-2xl tracking-tight text-white">
+                  FIT<span className="text-brand-primary">.</span>EQ
+                </span>
+              </Link>
             </div>
-          </Link>
-          {}
 
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={['/']}
-            items={items}
-            style={{ flex: 1, minWidth: 0 }}
-          />
-          {token ? (
-            <Profile />
-          ) : (
-            <Link to={`/login`} className="text-white">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="size-10 "
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center gap-8">
+              {navLinks.map((link) => (
+                <NavLink
+                  key={link.path}
+                  to={link.path}
+                  className={({ isActive }) =>
+                    `text-sm font-bold tracking-wide transition-colors ${
+                      isActive
+                        ? 'text-brand-primary'
+                        : 'text-slate-300 hover:text-white'
+                    }`
+                  }
+                >
+                  {link.name}
+                </NavLink>
+              ))}
+            </nav>
+
+            {/* Actions */}
+            <div className="hidden lg:flex items-center gap-6">
+              <Link
+                to="/my-cart"
+                className="relative text-slate-300 hover:text-white transition-colors p-2"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                />
-              </svg>
-            </Link>
-          )}
-        </Header>
-        <Content style={{ padding: '0 48px' }}>
-          <div
-            style={{
-              padding: 25,
-              minHeight: 590,
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG,
-            }}
-          >
-            <Outlet />
+                <ShoppingCart className="h-6 w-6" />
+              </Link>
+              
+              <div className="h-6 w-px bg-slate-700"></div>
+
+              {token ? (
+                <Profile />
+              ) : (
+                <Link
+                  to="/login"
+                  className="flex items-center gap-2 bg-brand-primary text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-brand-primary-hover transition-colors shadow-sm"
+                >
+                  <User className="h-4 w-4" />
+                  Sign In
+                </Link>
+              )}
+            </div>
+
+            {/* Mobile menu button */}
+            <div className="flex items-center lg:hidden gap-4">
+              <Link
+                to="/my-cart"
+                className="text-slate-300 hover:text-white"
+              >
+                <ShoppingCart className="h-6 w-6" />
+              </Link>
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="text-slate-300 hover:text-white p-2"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <MenuIcon className="h-6 w-6" />
+                )}
+              </button>
+            </div>
           </div>
-        </Content>
-      </Layout>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden bg-slate-900 border-b border-slate-800 px-4 pt-2 pb-4 space-y-1 shadow-lg">
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.path}
+                to={link.path}
+                className={({ isActive }) =>
+                  `block px-4 py-3 rounded-xl text-base font-bold ${
+                    isActive
+                      ? 'bg-brand-primary/20 text-brand-primary'
+                      : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                  }`
+                }
+              >
+                {link.name}
+              </NavLink>
+            ))}
+            <div className="pt-4 mt-4 border-t border-slate-800 px-4 pb-2">
+              {token ? (
+                <Profile />
+              ) : (
+                <Link
+                  to="/login"
+                  className="flex items-center justify-center gap-2 bg-brand-primary text-white px-5 py-3 rounded-xl font-bold text-base hover:bg-brand-primary-hover transition-colors w-full"
+                >
+                  <User className="h-5 w-5" />
+                  Sign In
+                </Link>
+              )}
+            </div>
+          </div>
+        )}
+      </header>
+
+      <main className="flex-grow w-full h-full min-h-[calc(100vh-80px)]">
+        <Outlet />
+      </main>
     </div>
   );
 };
