@@ -27,7 +27,7 @@ const DeleteProducts = ({ data }: any) => {
   };
   return (
     <div>
-      <Button type="primary" onClick={showModal}>
+      <Button type="primary" danger onClick={showModal}>
         Delete
       </Button>
       <Modal
