@@ -1,58 +1,139 @@
+import { Facebook, Instagram, Twitter, Youtube, Mail, Phone, MapPin } from 'lucide-react';
+
 const Footer = () => {
   return (
-    <div>
-      <footer className="footer bg-[#001529] text-base-content p-10">
-        <nav>
-          <h6 className="footer-title">Contact us</h6>
-          <a className="link link-hover">District : Thakurgaon</a>
-          <a className="link link-hover">Upazila : Thakurgaon</a>
-          <a className="link link-hover">
-            Address : Thakurgaon Polytechnic institute
-          </a>
-          <a className="link link-hover">Email : mdalifk2002@gmail.com</a>
-          <a className="link link-hover">Phone : 01704347965</a>
-        </nav>
-        <nav>
-          <h6 className="footer-title">Company</h6>
-          <a className="link link-hover" href="/about">
-            About us
-          </a>
-          <a className="link link-hover" href="/contact">
-            Contact
-          </a>
-          <a className="link link-hover">Email : mdalifk2002@gmail.com</a>
-          <a className="link link-hover">Phone : 01704347965</a>
-        </nav>
-        <nav>
-          <h6 className="footer-title">Social</h6>
-          <div className="grid grid-flow-col gap-4">
-            <a target="-blank" href="https://x.com/MDAlifK26277528">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                className="fill-current"
-              >
-                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
-              </svg>
-            </a>
-
-            <a href="https://www.facebook.com/mdalifkhan123/" target="-blank">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                className="fill-current"
-              >
-                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
-              </svg>
-            </a>
+    <footer className="bg-gray-950 text-gray-300 border-t border-gray-900 pt-16 pb-8">
+      <div className="container mx-auto px-6 max-w-6xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+          {/* Brand Info */}
+          <div className="flex flex-col text-left">
+            <h2 className="text-2xl font-black text-white tracking-wider mb-5">
+              FIT<span className="text-brand-primary">.</span>EQ
+            </h2>
+            <p className="text-sm text-gray-400 leading-relaxed mb-6">
+              FIT-EQ provides commercial-grade training and gym gear designed for high-performance home workouts. Empower your fitness journey with our durable, premium equipment.
+            </p>
+            <div className="flex gap-4">
+              <a href="https://www.facebook.com/mdalifkhan123/" target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors duration-200">
+                <Facebook className="w-5 h-5" />
+              </a>
+              <a href="https://x.com/MDAlifK26277528" target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary/80 transition-colors duration-200">
+                <Twitter className="w-5 h-5" />
+              </a>
+              <a href="#" className="hover:text-pink-500 transition-colors duration-200">
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a href="#" className="hover:text-red-500 transition-colors duration-200">
+                <Youtube className="w-5 h-5" />
+              </a>
+            </div>
           </div>
-        </nav>
-      </footer>
-    </div>
+
+          {/* Quick Links */}
+          <div className="flex flex-col text-left">
+            <h3 className="text-sm font-bold text-white uppercase tracking-widest mb-5">
+              Quick Links
+            </h3>
+            <ul className="space-y-3">
+              <li>
+                <a href="/products" className="text-sm hover:text-brand-primary transition-colors duration-200">
+                  Shop All Gear
+                </a>
+              </li>
+              <li>
+                <a href="/about" className="text-sm hover:text-brand-primary transition-colors duration-200">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="/contact" className="text-sm hover:text-brand-primary transition-colors duration-200">
+                  Contact Us
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-sm hover:text-brand-primary transition-colors duration-200">
+                  Terms of Service
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-sm hover:text-brand-primary transition-colors duration-200">
+                  Privacy Policy
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Support / Coordinates */}
+          <div className="flex flex-col text-left">
+            <h3 className="text-sm font-bold text-white uppercase tracking-widest mb-5">
+              Contact & Support
+            </h3>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-brand-primary shrink-0 mt-0.5" />
+                <span className="text-sm text-gray-400">
+                  123 Fitness Ave, Suite 100, New York, NY 10001
+                </span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone className="w-5 h-5 text-brand-primary shrink-0" />
+                <span className="text-sm text-gray-400">
+                  +1 (800) 555-0199
+                </span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Mail className="w-5 h-5 text-brand-primary shrink-0" />
+                <span className="text-sm text-gray-400">
+                  support@fit-eq.com
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Newsletter / Subscription */}
+          <div className="flex flex-col text-left">
+            <h3 className="text-sm font-bold text-white uppercase tracking-widest mb-5">
+              Newsletter
+            </h3>
+            <p className="text-sm text-gray-400 mb-4">
+              Subscribe to receive updates, access to exclusive deals, and more.
+            </p>
+            <div className="flex flex-col gap-2">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="bg-gray-900 border border-gray-800 text-white rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand-primary transition-all"
+              />
+              <button className="bg-brand-primary hover:bg-brand-primary-hover text-white font-bold py-2.5 px-4 rounded-xl text-sm transition duration-300">
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Trust & Copyright Row */}
+        <div className="border-t border-gray-900 pt-8 mt-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <p className="text-xs text-gray-500 text-center md:text-left">
+            &copy; 2026 FIT-EQ. All rights reserved. Designed for elite training.
+          </p>
+          
+          {/* Payment Trust Icons */}
+          <div className="flex items-center gap-4 text-xs font-semibold text-gray-600">
+            <span>SECURE PAYMENT:</span>
+            <div className="flex items-center gap-2">
+              {/* Visa */}
+              <span className="bg-gray-900 border border-gray-800 rounded px-2 py-1 text-[10px] text-gray-400 tracking-wider">VISA</span>
+              {/* Mastercard */}
+              <span className="bg-gray-900 border border-gray-800 rounded px-2 py-1 text-[10px] text-gray-400 tracking-wider">MASTERCARD</span>
+              {/* Stripe */}
+              <span className="bg-gray-900 border border-gray-800 rounded px-2 py-1 text-[10px] text-gray-400 tracking-wider">STRIPE</span>
+              {/* Apple Pay */}
+              <span className="bg-gray-900 border border-gray-800 rounded px-2 py-1 text-[10px] text-gray-400 tracking-wider">APPLE PAY</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 };
 

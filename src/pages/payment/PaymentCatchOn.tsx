@@ -55,7 +55,7 @@ const PaymentCatchOn = ({ deleveryProductsInfo }: any) => {
     <div>
       <Button
         onClick={showDrawer}
-        className=" w-52 h-20 rounded-xl  bg-black text-white text-center pt-5 text-2xl"
+        className=" w-52 h-20 rounded-xl bg-brand-secondary hover:bg-brand-secondary-hover text-white text-center pt-5 text-2xl border-0"
       >
         <div className="">
           <svg
@@ -106,7 +106,7 @@ const PaymentCatchOn = ({ deleveryProductsInfo }: any) => {
           {/* </div> */}
           <Button
             onClick={hendleProcessOrder}
-            className="bg-[#001529] h-14 text-white"
+            className="bg-brand-secondary hover:bg-brand-secondary-hover h-14 text-white border-0"
           >
             <p onClick={onClose}>
               Process Order

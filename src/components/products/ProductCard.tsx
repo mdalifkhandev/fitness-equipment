@@ -20,7 +20,7 @@ const ProductCard = ({ card }: any) => {
         
         {/* Discount Badge Overlay */}
         {card.discount > 0 && (
-          <span className="absolute top-3 right-3 bg-red-500 text-white text-xs font-extrabold px-3 py-1.5 rounded-lg shadow-sm tracking-wider uppercase z-10">
+          <span className="absolute top-3 right-3 bg-brand-accent text-white text-xs font-extrabold px-3 py-1.5 rounded-lg shadow-sm tracking-wider uppercase z-10">
             Save {card.discount}%
           </span>
         )}
@@ -29,12 +29,12 @@ const ProductCard = ({ card }: any) => {
       {/* Product Information */}
       <div className="flex flex-col flex-1 p-5">
         {/* Category */}
-        <span className="text-xs font-bold text-blue-500 uppercase tracking-widest mb-1.5">
+        <span className="text-xs font-bold text-brand-primary uppercase tracking-widest mb-1.5">
           {card.catagory || 'FIT-EQ'}
         </span>
         
         {/* Product Name */}
-        <h3 className="font-bold text-gray-900 text-base line-clamp-2 mb-2 min-h-[3rem] leading-snug group-hover:text-blue-600 transition-colors duration-200">
+        <h3 className="font-bold text-gray-900 text-base line-clamp-2 mb-2 min-h-[3rem] leading-snug group-hover:text-brand-primary transition-colors duration-200">
           {card.name}
         </h3>
 

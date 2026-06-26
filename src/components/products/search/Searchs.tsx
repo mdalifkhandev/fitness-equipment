@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Input, Space } from 'antd';
+import { Input } from 'antd';
 import type { GetProps } from 'antd';
 
 type SearchProps = GetProps<typeof Input.Search>;
@@ -11,16 +11,15 @@ const Searchs = ({ setSearch }: any) => {
     setSearch(value);
   };
   return (
-    <div>
-      <Space direction="vertical">
-        <Search
-          placeholder="Products search by name"
-          allowClear
-          enterButton="Search"
-          size="large"
-          onSearch={onSearch}
-        />
-      </Space>
+    <div className="w-full pt-1">
+      <Search
+        placeholder="Search products..."
+        allowClear
+        enterButton="Search"
+        size="large"
+        onSearch={onSearch}
+        className="rounded-xl overflow-hidden"
+      />
     </div>
   );
 };

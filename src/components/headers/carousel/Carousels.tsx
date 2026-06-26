@@ -70,7 +70,7 @@ const Carousels = () => {
             {/* Content Card Overlay */}
             <div className="absolute inset-0 flex flex-col justify-center px-6 sm:px-12 md:px-24 lg:px-32 text-white z-[2] max-w-4xl">
               {item.tag && (
-                <span className="inline-block text-xs sm:text-sm font-bold tracking-widest text-blue-400 uppercase mb-3 border-l-4 border-blue-500 pl-3">
+                <span className="inline-block text-xs sm:text-sm font-bold tracking-widest text-brand-primary uppercase mb-3 border-l-4 border-brand-primary pl-3">
                   {item.tag}
                 </span>
               )}
@@ -84,7 +84,7 @@ const Carousels = () => {
                 {item.buttonText && (
                   <a
                     href={item.buttonLink}
-                    className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 sm:py-3 px-6 sm:px-8 text-sm sm:text-base rounded-xl shadow-lg transition duration-300 transform hover:scale-105"
+                    className="inline-flex items-center justify-center bg-brand-primary hover:bg-brand-primary-hover text-white font-bold py-2.5 sm:py-3 px-6 sm:px-8 text-sm sm:text-base rounded-xl shadow-lg transition duration-300 transform hover:scale-105"
                   >
                     {item.buttonText}
                   </a>

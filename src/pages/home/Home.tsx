@@ -18,7 +18,7 @@ const Home = () => {
         <Carousel />
       </div>
       <div className="text-center mt-16 mb-10">
-        <span className="text-sm font-extrabold tracking-widest text-blue-600 uppercase border-b-2 border-blue-500 pb-1">
+        <span className="text-sm font-extrabold tracking-widest text-brand-primary uppercase border-b-2 border-brand-primary pb-1">
           Featured Gear
         </span>
         <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 mt-3 uppercase">
@@ -36,7 +36,7 @@ const Home = () => {
       <div className="flex justify-center mb-16">
         <a
           href="/products"
-          className="inline-flex items-center justify-center bg-gray-950 text-white font-bold py-3 px-10 rounded-xl hover:bg-gray-800 transition duration-300 transform hover:scale-105 shadow-md"
+          className="inline-flex items-center justify-center bg-brand-secondary text-white font-bold py-3 px-10 rounded-xl hover:bg-brand-secondary-hover transition duration-300 transform hover:scale-105 shadow-md"
         >
           See All Products
         </a>

@@ -9,11 +9,21 @@ import { Toaster } from 'sonner';
 import { PersistGate } from 'redux-persist/integration/react';
 // import { Toaster } from './components/ui/toaster.tsx'
 
+import { ConfigProvider } from 'antd';
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <RouterProvider router={router} />
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: 'var(--brand-primary)',
+            },
+          }}
+        >
+          <RouterProvider router={router} />
+        </ConfigProvider>
       </PersistGate>
       <Toaster />
     </Provider>

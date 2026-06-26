@@ -55,7 +55,7 @@ const BenefitSection = () => {
     <div className="w-full bg-gray-50/10 py-12 border-t border-gray-100">
       {/* Title Header */}
       <div className="text-center mb-12">
-        <span className="text-sm font-extrabold tracking-widest text-blue-600 uppercase border-b-2 border-blue-500 pb-1">
+        <span className="text-sm font-extrabold tracking-widest text-brand-primary uppercase border-b-2 border-brand-primary pb-1">
           Train Smarter
         </span>
         <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 mt-3 uppercase">
@@ -84,11 +84,11 @@ const BenefitSection = () => {
               {/* Text Content */}
               <div className="p-6 md:p-8 flex flex-col flex-grow text-left">
                 {item.tag && (
-                  <span className="text-xs font-bold text-blue-500 tracking-widest uppercase mb-1.5">
+                  <span className="text-xs font-bold text-brand-primary tracking-widest uppercase mb-1.5">
                     {item.tag}
                   </span>
                 )}
-                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition-colors duration-200">
                   {item.title}
                 </h3>
                 <p className="text-sm text-gray-500 leading-relaxed">
