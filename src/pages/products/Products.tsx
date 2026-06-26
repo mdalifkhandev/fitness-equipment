@@ -38,7 +38,7 @@ const Products = () => {
         </div>
       </div>
       <h1 className="font-bold text-center text-xl my-4">
-        {data?.data?.length} Prodoct
+        {data?.data?.length === 1 ? '1 Product' : `${data?.data?.length || 0} Products`}
       </h1>
       <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-6">
         {// eslint-disable-next-line @typescript-eslint/no-explicit-any

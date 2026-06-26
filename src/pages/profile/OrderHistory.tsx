@@ -58,7 +58,7 @@ console.log(ids);
             type="inner"
             title={card.name}
             // extra={<a href={`/products/${card._id}`}>Details</a>}
-            extra={<a href={`/my-card`}>Details</a>}
+            extra={<a href={`/my-cart`}>Details</a>}
           >
             <div className="flex gap-6 justify-between items-center">
               <div>

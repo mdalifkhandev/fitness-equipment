@@ -34,10 +34,10 @@ const Profile = () => {
       ) : null,
     },
     {
-      key: 'My Card',
+      key: 'My Cart',
       label: token ? (
-        <Link to={'/my-card'} className="">
-          My Card
+        <Link to={'/my-cart'} className="">
+          My Cart
         </Link>
       ) : null,
     },

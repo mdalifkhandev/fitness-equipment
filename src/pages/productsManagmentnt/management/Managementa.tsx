@@ -35,7 +35,7 @@ const Managementa = () => {
       key: 'name',
     },
     {
-      title: 'Catagory',
+      title: 'Category',
       dataIndex: 'catagory',
       key: 'catagory',
     },

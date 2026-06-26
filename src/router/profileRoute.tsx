@@ -23,8 +23,8 @@ export const profilePath = [
     ),
   },
   {
-    name: 'MY Card',
-    path: 'my-card',
+    name: 'My Cart',
+    path: 'my-cart',
     element: (
       // <ProtactRoute>
         <MyCard />

@@ -15,7 +15,7 @@ const PriceRange = ({ setMinPrice, setMixPrice }: any) => {
       <form onSubmit={onFinish} className="flex items-center gap-2 w-64">
         <p>Price:</p>
         <Input name="min" placeholder="Min Price" />
-        <Input name="mix" placeholder="Mix Price" />
+        <Input name="mix" placeholder="Max Price" />
         <Input
           type="submit"
           value="Price"
