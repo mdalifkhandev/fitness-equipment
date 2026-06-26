@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Input } from 'antd';
+import { Input, Button } from 'antd';
 
 const PriceRange = ({ setMinPrice, setMixPrice }: any) => {
   const onFinish = (event: any) => {
@@ -11,16 +11,30 @@ const PriceRange = ({ setMinPrice, setMixPrice }: any) => {
   };
 
   return (
-    <div>
-      <form onSubmit={onFinish} className="flex items-center gap-2 w-64">
-        <p>Price:</p>
-        <Input name="min" placeholder="Min Price" />
-        <Input name="mix" placeholder="Max Price" />
-        <Input
-          type="submit"
-          value="Price"
-          className="bg-[#1677FF] text-green-500"
-        />
+    <div className="w-full pt-1">
+      <form onSubmit={onFinish} className="flex flex-col gap-3 w-full">
+        <div className="flex items-center gap-2">
+          <Input 
+            name="min" 
+            type="number" 
+            placeholder="Min" 
+            className="rounded-xl border-gray-200" 
+          />
+          <span className="text-gray-400 font-bold">-</span>
+          <Input 
+            name="mix" 
+            type="number" 
+            placeholder="Max" 
+            className="rounded-xl border-gray-200" 
+          />
+        </div>
+        <Button 
+          type="primary" 
+          htmlType="submit" 
+          className="w-full bg-brand-primary hover:bg-brand-primary-hover text-white font-bold rounded-xl h-10 border-0 shadow-sm transition-all"
+        >
+          Apply Price
+        </Button>
       </form>
     </div>
   );

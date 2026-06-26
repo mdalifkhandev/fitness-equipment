@@ -6,7 +6,7 @@ const achievements = [
     icon: Award,
     title: '100,000+ Facilities',
     description: 'Trusted by elite fitness clubs, professional athletic teams, and top universities in over 165 countries worldwide.',
-    color: 'text-blue-500 bg-blue-50/50 border-blue-100',
+    color: 'text-brand-primary bg-brand-primary-light/50 border-brand-primary/20',
   },
   {
     key: 2,
@@ -36,7 +36,7 @@ const Section = () => {
     <div className="w-full bg-gray-50/30 py-8">
       {/* Title Header */}
       <div className="text-center mt-12 mb-12">
-        <span className="text-sm font-extrabold tracking-widest text-blue-600 uppercase border-b-2 border-blue-500 pb-1">
+        <span className="text-sm font-extrabold tracking-widest text-brand-primary uppercase border-b-2 border-brand-primary pb-1">
           Our Milestones
         </span>
         <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 mt-3 uppercase">
@@ -55,7 +55,7 @@ const Section = () => {
                 className="group relative flex flex-col items-center text-center p-8 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
               >
                 {/* Accent Highlight Bar on Hover */}
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-primary to-brand-primary-hover transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
                 
                 {/* Icon Wrapper */}
                 <div className={`flex items-center justify-center w-16 h-16 rounded-2xl mb-6 border ${item.color} transition-transform duration-300 group-hover:scale-110 shadow-inner`}>
@@ -63,7 +63,7 @@ const Section = () => {
                 </div>
                 
                 {/* Title */}
-                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition-colors duration-200">
                   {item.title}
                 </h3>
                 

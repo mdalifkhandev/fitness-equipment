@@ -21,7 +21,7 @@ const About = () => {
         <p className="text-lg text-gray-600 leading-relaxed mb-8">
           Every piece of equipment is crafted with strict attention to durability, aesthetics, and user safety, offering premium performance at an unbeatable value.
         </p>
-        <h3 className="text-3xl font-bold text-blue-600 mb-8">Stay fit in the comfort of your home.</h3>
+        <h3 className="text-3xl font-bold text-brand-primary mb-8">Stay fit in the comfort of your home.</h3>
         <div className="flex justify-center rounded-2xl overflow-hidden shadow-2xl mb-16">
           <img src={about} alt="FIT-EQ Workspace" className="w-full max-h-[500px] object-cover" />
         </div>

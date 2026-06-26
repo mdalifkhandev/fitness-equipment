@@ -18,6 +18,14 @@ module.exports = {
     },
     extend: {
       colors: {
+        brand: {
+          primary: 'var(--brand-primary)',
+          'primary-hover': 'var(--brand-primary-hover)',
+          'primary-light': 'var(--brand-primary-light)',
+          secondary: 'var(--brand-secondary)',
+          'secondary-hover': 'var(--brand-secondary-hover)',
+          accent: 'var(--brand-accent)',
+        },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

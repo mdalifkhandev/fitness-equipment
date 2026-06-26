@@ -230,7 +230,7 @@ const MyCard = () => {
               href={`/products/checkout`}
               onClick={hendelCheakOut}
               disabled={!totalSelectItemId.length}
-              className="w-full mt-5 bg-[#001529] text-white"
+              className="w-full mt-5 bg-brand-secondary hover:bg-brand-secondary-hover text-white border-0"
             >
               Checkout
             </Button>
