@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { AnyAction } from 'redux';
 
 interface PaymentState {
   loading: boolean;
@@ -22,15 +21,16 @@ type PaymentAction =
 
 export const paymentReducer = (
   state = initialState,
-  action: PaymentAction | AnyAction, // Now it can handle AnyAction as well
+  action: any,
 ): PaymentState => {
-  switch (action.type) {
+  const paymentAction = action as PaymentAction;
+  switch (paymentAction.type) {
     case 'PAYMENT_REQUEST':
       return { ...state, loading: true };
     case 'PAYMENT_SUCCESS':
       return { ...state, loading: false, success: true };
     case 'PAYMENT_ERROR':
-      return { ...state, loading: false, error: action.payload };
+      return { ...state, loading: false, error: paymentAction.payload };
     default:
       return state; // Always return the current state for unknown actions
   }
