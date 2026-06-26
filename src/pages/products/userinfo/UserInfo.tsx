@@ -59,13 +59,13 @@ const UserInfo = ({setUserInfo}:any) => {
       <div>
         {/* Trigger modal with a div */}
         <div style={{ cursor: 'pointer', color: 'blue' }} onClick={showModal}>
-          Please Provide your Delevery address
+          Please Provide your Delivery address
         </div>
 
         {/* Ant Design Modal without OK and Cancel buttons */}
         <Modal
-          title="Provide your Delevery address"
-          visible={isModalVisible}
+          title="Provide your Delivery address"
+          open={isModalVisible}
           onCancel={handleClose}
           footer={null}
         >
@@ -118,18 +118,18 @@ const UserInfo = ({setUserInfo}:any) => {
               <Input />
             </Form.Item>
             <Form.Item<FieldUserType>
-              label="Distric"
+              label="District"
               name="distric"
               rules={[
-                { required: true, message: 'Please input your Distric!' },
+                { required: true, message: 'Please input your District!' },
               ]}
             >
               <Input />
             </Form.Item>
             <Form.Item<FieldUserType>
-              label="Upzela"
+              label="Upazila"
               name="upzelea"
-              rules={[{ required: true, message: 'Please input your Upzela!' }]}
+              rules={[{ required: true, message: 'Please input your Upazila!' }]}
             >
               <Input />
             </Form.Item>

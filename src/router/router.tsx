@@ -29,7 +29,7 @@ const router = createBrowserRouter([
         element: <ProductDetails />,
       },
       {
-        path: 'products/cheakout',
+        path: 'products/checkout',
         element: <CheakOut />,
       },
       {

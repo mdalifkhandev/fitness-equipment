@@ -145,7 +145,7 @@ const ProductDetails = () => {
               onClick={handleAddToCard}
               className="w-full my-3 btn btn-outline text-black"
             >
-              ADD TO CARD
+              ADD TO CART
             </Button>
           </div>
           {/* <div className="mb-14">
@@ -159,17 +159,6 @@ const ProductDetails = () => {
             </Button>
           </div> */}
           <br />
-          <div>
-            <h1 className="text-4xl font-bold">{dat?.discreption}</h1>
-            {dat?.extarDiscreption?.header && (
-              <h1 className="text-2xl font-semibold mt-5">
-                {dat?.extarDiscreption?.header}:
-              </h1>
-            )}
-            {dat?.extarDiscreption?.details && (
-              <p className="font-semibold ">{dat?.extarDiscreption?.details}</p>
-            )}
-          </div>
           <div>
             <h1 className="text-4xl font-bold">{dat?.discreption}</h1>
             {dat?.extarDiscreption?.header && (

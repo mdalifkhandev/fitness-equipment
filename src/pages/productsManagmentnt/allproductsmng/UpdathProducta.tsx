@@ -67,7 +67,7 @@ const UpdateProductModal = ({ data }: any) => {
 
       <Modal
         title="Update Product"
-        visible={open}
+        open={open}
         onCancel={handleCancel}
         footer={null}
       >
@@ -99,9 +99,9 @@ const UpdateProductModal = ({ data }: any) => {
           </Form.Item>
 
           <Form.Item<FieldType>
-            label="Catagory"
+            label="Category"
             name="catagory"
-            rules={[{ message: 'Please input your Catagory!' }]}
+            rules={[{ message: 'Please input your Category!' }]}
           >
             <Input placeholder={data.catagory} />
           </Form.Item>

@@ -28,10 +28,10 @@ const DeleteProducts = ({ data }: any) => {
   return (
     <div>
       <Button type="primary" onClick={showModal}>
-        Deleted
+        Delete
       </Button>
       <Modal
-        title="Confirm Deleted"
+        title="Confirm Delete"
         className=" "
         open={isModalOpen}
         onOk={handleOk}

@@ -23,8 +23,8 @@ export const userPath = [
     element: <Managementa />,
   },
   {
-    name: 'My Card',
-    path: 'my-card',
+    name: 'My Cart',
+    path: 'my-cart',
     element: <MyCard />
       
   },

@@ -178,9 +178,9 @@ const AddProductsModal = () => {
           </Form.Item>
 
           <Form.Item<FieldType>
-            label="Catagory"
+            label="Category"
             name="catagory"
-            rules={[{ required: true, message: 'Please input your Catagory!' }]}
+            rules={[{ required: true, message: 'Please input your Category!' }]}
           >
             <Input />
           </Form.Item>

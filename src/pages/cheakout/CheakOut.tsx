@@ -135,19 +135,19 @@ const CheakOut = () => {
                   {userinfo.phonNumber}
                 </p>
                 <p className="flex justify-between mt-3 font-bold">
-                  <span>Your dividion : </span>
+                  <span>Your Division : </span>
                   {userinfo.division}
                 </p>
                 <p className="flex justify-between mt-3 font-bold">
-                  <span>Your distric : </span>
+                  <span>Your District : </span>
                   {userinfo.distric}
                 </p>
                 <p className="flex justify-between mt-3 font-bold">
-                  <span>Your upzela : </span>
+                  <span>Your Upazila : </span>
                   {userinfo.upzelea}
                 </p>
                 <p className="flex justify-between mt-3 font-bold">
-                  <span>Your address : </span>
+                  <span>Your Address : </span>
                   {userinfo.address}
                 </p>
               </div>
@@ -164,7 +164,7 @@ const CheakOut = () => {
             </>
           ) : (
             <>
-              <p>Please give Your addres</p>
+              <p className="text-xl font-bold text-center m-5">Please provide your address</p>
               <UserInfo 
               setUserInfo={setUserInfo}
               // modalData={modelData} 
@@ -187,7 +187,7 @@ const CheakOut = () => {
                 </div>
 
                 <div className="  mt-6">
-                  <p>Qit : {quentity[products._id] || 1} </p>
+                  <p>Qty : {quentity[products._id] || 1} </p>
                   <p>
                     {' '}
                     Price : ${' '}
@@ -214,12 +214,16 @@ const CheakOut = () => {
 
           <div className="m-6 font-bold text-2xl">
             <div className="flex gap-5 justify-between mt-6">
+              <p> Subtotal </p>
+              <p> $ {totalPrice} </p>
+            </div>
+            <div className="flex gap-5 justify-between mt-6">
               <p> Shipping </p>
               <p> $ {shipping} </p>
             </div>
             <div className="flex gap-5 justify-between mt-6">
               <p>Total Price </p>
-              <p> $ {totalPrice} </p>
+              <p> $ {totalPrice + shipping} </p>
             </div>
           </div>
           {id ? (

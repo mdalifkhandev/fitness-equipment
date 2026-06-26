@@ -210,7 +210,7 @@ const MyCard = () => {
             <p>User Location</p>
           </div>
           <div className="m-5 p-3 h-10">
-            <p className="text-xl">Order Summery</p>
+            <p className="text-xl">Order Summary</p>
             <div className="flex justify-between mt-5">
               <p>Subtotal ({totalItems} items)</p>
               <p>{totalPrice}</p>
@@ -227,12 +227,12 @@ const MyCard = () => {
               <p>{totalItems ? shipping + totalPrice : 0}</p>
             </div>
             <Button
-              href={`/products/cheakout`}
+              href={`/products/checkout`}
               onClick={hendelCheakOut}
               disabled={!totalSelectItemId.length}
               className="w-full mt-5 bg-[#001529] text-white"
             >
-              CheakOut
+              Checkout
             </Button>
           </div>
         </div>
