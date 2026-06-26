@@ -10,6 +10,7 @@ const createAddToCard = baseApi.injectEndpoints({
           body: data,
         };
       },
+      invalidatesTags: ['products'],
     }),
     getAddToCard: builder.query({
       query: () => {
@@ -29,6 +30,7 @@ const createAddToCard = baseApi.injectEndpoints({
           method: 'DELETE',
         };
       },
+      invalidatesTags: ['products'],
     }),
   }),
 });
