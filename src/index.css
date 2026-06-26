@@ -98,4 +98,14 @@
     color: var(--brand-primary) !important;
     border-color: var(--brand-primary) !important;
   }
+
+  /* Ant Design Search Input Rounding Fix */
+  .ant-input-group-wrapper.rounded-xl .ant-input-affix-wrapper {
+    border-top-left-radius: 0.75rem !important;
+    border-bottom-left-radius: 0.75rem !important;
+  }
+  .ant-input-group-wrapper.rounded-xl .ant-btn {
+    border-top-right-radius: 0.75rem !important;
+    border-bottom-right-radius: 0.75rem !important;
+  }
 }
