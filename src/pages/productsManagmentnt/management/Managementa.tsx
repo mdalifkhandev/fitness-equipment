@@ -222,6 +222,10 @@ const Managementa = () => {
             allowClear
             onChange={(value) => setCatagory(value || undefined)}
             style={{ width: 200 }}
+            className="products-management-category-select"
+            popupClassName="products-management-category-dropdown"
+            getPopupContainer={triggerNode => triggerNode.parentElement || document.body}
+            placement="bottomLeft"
             options={categoriesOptions}
           />
         </div>
