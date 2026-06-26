@@ -9,12 +9,13 @@ type FieldType = {
   lestName?: string;
   email?: string;
   password?: string;
+
 };
 
 const Registration = () => {
   const [createRoot, { isLoading }] = useCreateUserMutation();
   const navigate = useNavigate();
-  
+
   const onFinish: FormProps<FieldType>['onFinish'] = async values => {
     try {
       const userInfo = {
@@ -62,22 +63,22 @@ const Registration = () => {
                 rules={[{ required: true, message: 'First Name required!' }]}
                 className="mb-0"
               >
-                <Input 
-                  prefix={<User className="h-4 w-4 text-slate-400 mr-2" />} 
-                  placeholder="John" 
+                <Input
+                  prefix={<User className="h-4 w-4 text-slate-400 mr-2" />}
+                  placeholder="John"
                   className="h-12 rounded-xl border-slate-200 bg-slate-50 hover:bg-white focus:bg-white"
                 />
               </Form.Item>
-              
+
               <Form.Item<FieldType>
                 label={<span className="text-sm font-bold text-slate-700">Last Name</span>}
                 name="lestName"
                 rules={[{ required: true, message: 'Last Name required!' }]}
                 className="mb-0"
               >
-                <Input 
-                  prefix={<User className="h-4 w-4 text-slate-400 mr-2" />} 
-                  placeholder="Doe" 
+                <Input
+                  prefix={<User className="h-4 w-4 text-slate-400 mr-2" />}
+                  placeholder="Doe"
                   className="h-12 rounded-xl border-slate-200 bg-slate-50 hover:bg-white focus:bg-white"
                 />
               </Form.Item>
@@ -92,9 +93,9 @@ const Registration = () => {
               ]}
               className="mb-4"
             >
-              <Input 
-                prefix={<Mail className="h-5 w-5 text-slate-400 mr-2" />} 
-                placeholder="john@example.com" 
+              <Input
+                prefix={<Mail className="h-5 w-5 text-slate-400 mr-2" />}
+                placeholder="john@example.com"
                 className="h-12 rounded-xl border-slate-200 bg-slate-50 hover:bg-white focus:bg-white"
               />
             </Form.Item>
@@ -105,17 +106,17 @@ const Registration = () => {
               rules={[{ required: true, message: 'Password required!' }]}
               className="mb-6"
             >
-              <Input.Password 
+              <Input.Password
                 prefix={<Lock className="h-5 w-5 text-slate-400 mr-2" />}
-                placeholder="Min. 8 characters" 
+                placeholder="Min. 8 characters"
                 className="h-12 rounded-xl border-slate-200 bg-slate-50 hover:bg-white focus:bg-white"
               />
             </Form.Item>
 
             <Form.Item className="mb-0">
-              <Button 
-                type="primary" 
-                htmlType="submit" 
+              <Button
+                type="primary"
+                htmlType="submit"
                 loading={isLoading}
                 className="w-full h-12 rounded-xl bg-slate-900 hover:!bg-brand-primary border-none text-base font-bold text-white shadow-md transition-colors flex items-center justify-center group"
               >
@@ -138,8 +139,8 @@ const Registration = () => {
             </div>
 
             <div className="mt-6 text-center">
-              <Link 
-                to="/login" 
+              <Link
+                to="/login"
                 className="font-bold text-brand-primary hover:text-brand-primary-hover transition-colors text-base"
               >
                 Sign in instead
