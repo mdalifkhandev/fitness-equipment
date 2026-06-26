@@ -108,4 +108,39 @@
     border-top-right-radius: 0.75rem !important;
     border-bottom-right-radius: 0.75rem !important;
   }
+
+  /* Ant Design Select Input Visibility & Aesthetic Fixes */
+  .ant-select-selection-item {
+    color: #1f2937 !important; /* Dark text for high visibility */
+    font-weight: 600 !important;
+  }
+  .ant-select-selection-placeholder {
+    color: #9ca3af !important;
+  }
+  .ant-select-selector {
+    border-radius: 0.75rem !important; /* Round the select box borders */
+  }
+  .ant-select-focused .ant-select-selector {
+    border-color: var(--brand-primary) !important;
+  }
+  
+  /* Dropdown Options */
+  .ant-select-item-option {
+    border-radius: 0.5rem !important; /* Rounded corners for select options */
+    margin: 2px 4px !important;
+    transition: all 0.2s ease !important;
+  }
+  .ant-select-item-option-content {
+    color: #374151 !important;
+  }
+  .ant-select-item-option-active {
+    background-color: #f3f4f6 !important;
+  }
+  .ant-select-item-option-selected {
+    background-color: var(--brand-primary-light) !important;
+  }
+  .ant-select-item-option-selected .ant-select-item-option-content {
+    color: var(--brand-primary) !important;
+    font-weight: 700 !important;
+  }
 }

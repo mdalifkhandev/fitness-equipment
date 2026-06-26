@@ -4,9 +4,13 @@ const productsAPI = baseApi.injectEndpoints({
   endpoints: builders => ({
     getProducts: builders.query({
       query: ({ catagory, search, minPrice, maxPrice }) => {
+        const params = new URLSearchParams();
+        if (catagory && catagory !== 'undefined') params.append('catagory', catagory);
+        if (search && search !== 'undefined') params.append('name', search);
+        if (minPrice && minPrice !== 'undefined') params.append('minPrice', minPrice.toString());
+        if (maxPrice && maxPrice !== 'undefined') params.append('maxPrice', maxPrice.toString());
         return {
-          // url: `/products`,
-          url: `/products?catagory=${catagory}&name=${search}&minPrice=${minPrice}&maxPrice=${maxPrice}`,
+          url: `/products?${params.toString()}`,
           method: 'GET',
         };
       },
