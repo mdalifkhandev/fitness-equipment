@@ -72,19 +72,20 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-brand-primary shrink-0 mt-0.5" />
                 <span className="text-sm text-gray-400">
-                  123 Fitness Ave, Suite 100, New York, NY 10001
+                  Mohakhali, Gulshan,<br />
+                  Dhaka, Bangladesh
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-brand-primary shrink-0" />
                 <span className="text-sm text-gray-400">
-                  +1 (800) 555-0199
+                  01704347965
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-brand-primary shrink-0" />
                 <span className="text-sm text-gray-400">
-                  support@fit-eq.com
+                  mdalifkhandev@gmail.com
                 </span>
               </li>
             </ul>
