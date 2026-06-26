@@ -59,7 +59,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(baseApi.middleware),
+    }).concat(baseApi.middleware) as any,
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
